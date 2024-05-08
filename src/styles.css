@@ -1,1 +1,31 @@
-/* You can add global styles to this file, and also import other style files */
+@import url(./app/components/reset/reset.css);
+
+
+:root {
+  --titulo: 'Bebas Neue', sans-serif;
+  --texto: 'Montserrat', sans-serif;
+  --azul: #0e9eda;
+  --amarelo: #ffd900;
+  --vermelho: #b71e1e;
+  --branco: #ffffff;
+  --preta: black;
+}
+
+
+
+body {
+
+  background-size: cover;
+  background-position: center;
+}
+
+
+@media(max-width:800px) {
+
+  body {
+    min-height: 100vh;
+    background-repeat: no-repeat;
+  }
+
+
+}
