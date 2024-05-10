@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {ButtonComponent} from "../button/button.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-registers',
@@ -11,5 +12,22 @@ import {ButtonComponent} from "../button/button.component";
   styleUrl: './registers.component.css'
 })
 export class RegistersComponent {
+
+  linkUrlCadastrar: string = '/cadastrar';
+  linkUrlSair: string = '/';
+  linkUrlOvertime: string = '/registros/hora-extra';
+  linkUrlRegistros: string = '/registros/por-data';
+
+
+
+
+  constructor(private router: Router) {
+
+  }
+
+
+  navigateTo(url: string) {
+    this.router.navigate([url]);
+  }
 
 }
