@@ -1,8 +1,8 @@
 <div class="container">
   <div class="titulo">
-    <h1>Ponto Eletronico</h1>
+    <h1>Horas extras</h1>
   </div>
-  <form (ngSubmit)="searchByDate()">
+  <form (ngSubmit)="searchOvertime()">
     <div class="form-group">
       <input type="text" id="username" name="username" [(ngModel)]="username" required>
       <label class="search-label" for="username">Usuario:</label>
@@ -16,11 +16,11 @@
         <input type=date id="endDate" name="endDate" [(ngModel)]="endDate" required>
         <label class="search-label" for="endDate">Data final:</label>
       </div>
-      </div>
+    </div>
 
-  <div class="buttons">
-    <app-button class="button">Buscar registros</app-button>
-  </div>
+    <div class="buttons">
+      <app-button class="button">Buscar horas extras</app-button>
+    </div>
   </form>
   <div class="buttons-buscar">
     <app-button class="button">Voltar</app-button>
