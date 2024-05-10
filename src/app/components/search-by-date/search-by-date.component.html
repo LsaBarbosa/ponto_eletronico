@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="titulo">
+    <h1>Ponto Eletronico</h1>
+  </div>
+  <form (ngSubmit)="searchByDate()">
+    <div class="form-group">
+      <input type="text" id="username" name="username" [(ngModel)]="username" required>
+      <label class="search-label" for="username">Usuario:</label>
+    </div>
+    <div class="date-class">
+      <div class="form-group">
+        <input type=date id="startDate" name="startDate" [(ngModel)]="startDate" required>
+        <label class="search-label" for="startDate">Data inicial:</label>
+      </div>
+      <div class="form-group">
+        <input type=date id="endDate" name="endDate" [(ngModel)]="endDate" required>
+        <label class="search-label" for="endDate">Data final:</label>
+      </div>
+      </div>
+
+  <div class="buttons">
+    <app-button class="button">Salvar usuário</app-button>
+  </div>
+  </form>
+  <div class="buttons-buscar">
+    <app-button class="button">Voltar</app-button>
+  </div>
+
+</div>
