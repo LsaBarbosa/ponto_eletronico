@@ -1,5 +1,4 @@
 
-
 .button {
   padding: 0.5em 2em;
 
@@ -13,3 +12,6 @@
 button:hover {
   background-color: #b36500;
 }
+
+
+@media(max-width:800px) {}

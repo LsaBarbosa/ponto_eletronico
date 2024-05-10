@@ -64,3 +64,4 @@ input[type="date"] {
   gap: 3em;
   padding-top: 3em ;
 }
+@media(max-width:800px) {}

@@ -1,3 +1,4 @@
+
 .container{
   display: flex;
   flex-direction: column;
@@ -7,7 +8,7 @@
 }
 
 h1{
-  font-size: 5em;
+  font-size: 4em;
   padding-bottom: 1em;
 }
 
@@ -50,3 +51,5 @@ input[type="password"] {
   gap: 3em;
   padding-top: 3em ;
 }
+
+@media(max-width:800px) {}
