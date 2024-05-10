@@ -1,0 +1,19 @@
+<div class="container">
+  <h1>Criar Usuário</h1>
+  <form (ngSubmit)="register()">
+    <div class="form-group">
+      <input type="text" id="username" name="username" [(ngModel)]="username" required>
+      <label class="login-label" for="username">Usuario:</label>
+    </div>
+    <div class="form-group">
+      <input type="password" id="password" name="password" [(ngModel)]="password" required>
+      <label class="login-label" for="password">Senha:</label>
+    </div>
+    <div class="buttons">
+    <app-button class="button">Salvar usuário</app-button>
+    </div>
+  </form>
+  <div class="buttons-registrar">
+    <app-button class="button">Voltar</app-button>
+  </div>
+</div>
