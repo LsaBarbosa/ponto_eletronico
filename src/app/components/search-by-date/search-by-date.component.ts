@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ButtonComponent} from "../button/button.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-search-by-date',
@@ -14,6 +15,14 @@ import {ButtonComponent} from "../button/button.component";
   styleUrl: './search-by-date.component.css'
 })
 export class SearchByDateComponent {
+  linkUrlRegistros: string = '/registros';
+
+  constructor(private router: Router) {}
+
+  navigateTo(url: string) {
+    this.router.navigate([url]);
+  }
+
   username: string = '';
   startDate: string = '';
   endDate: string = '';

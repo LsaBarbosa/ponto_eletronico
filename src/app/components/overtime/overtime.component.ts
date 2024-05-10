@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {ButtonComponent} from "../button/button.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-overtime',
@@ -14,6 +15,15 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
   styleUrl: './overtime.component.css'
 })
 export class OvertimeComponent {
+
+  linkUrlRegistros: string = '/registros';
+
+  constructor(private router: Router) {}
+
+  navigateTo(url: string) {
+    this.router.navigate([url]);
+  }
+
   username: string = '';
   startDate: string = '';
   endDate: string = '';

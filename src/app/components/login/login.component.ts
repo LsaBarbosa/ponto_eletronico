@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {ButtonComponent} from "../button/button.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,17 @@ import {ButtonComponent} from "../button/button.component";
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  linkUrlColaborador:string = "/colaborador";
+  constructor(private router: Router) {
+
+  }
+
+
+  navigateTo(url: string) {
+    this.router.navigate([url]);
+  }
+
+
   username: string = '';
   password: string = '';
 
