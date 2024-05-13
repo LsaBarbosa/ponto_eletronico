@@ -1,29 +1,49 @@
 <div class="container">
   <div class="titulo">
-    <h1>Ponto Eletronico</h1>
+    <h1>Ponto Eletrônico</h1>
   </div>
   <form (ngSubmit)="searchByDate()">
     <div class="form-group">
       <input type="text" id="username" name="username" [(ngModel)]="username" required>
-      <label class="search-label" for="username">Usuario:</label>
+      <label class="search-label" for="username">Usuário:</label>
     </div>
     <div class="date-class">
       <div class="form-group">
-        <input type=date id="startDate" name="startDate" [(ngModel)]="startDate" required>
-        <label class="search-label" for="startDate">Data inicial:</label>
+        <input type="date" class="form-control" id="start-date" name="start-date" [(ngModel)]="startDate">
+        <label class="search-label" for="start-date">Data inicial:</label>
       </div>
       <div class="form-group">
-        <input type=date id="endDate" name="endDate" [(ngModel)]="endDate" required>
-        <label class="search-label" for="endDate">Data final:</label>
+        <input type="date" class="form-control" id="end-date" name="end-date" [(ngModel)]="endDate">
+        <label class="search-label" for="end-date">Data final:</label>
       </div>
-      </div>
-
-  <div class="buttons">
-    <app-button class="button">Buscar registros</app-button>
-  </div>
+    </div>
+    <div class="buttons">
+      <app-button class="button">Buscar registros</app-button>
+    </div>
   </form>
   <div class="buttons-buscar">
     <app-button class="button" (click)="navigateTo(linkUrlRegistros)">Voltar</app-button>
   </div>
-
 </div>
+<div *ngIf="records.length > 0">
+  <h2>Registros encontrados:</h2>
+  <div *ngFor="let record of records" class="card">
+    <ul>
+      <li>
+        <strong>ID:</strong> {{ record.id }}
+      </li>
+      <li>
+        <strong>Start of Work:</strong> {{ record.startOfWork }}
+      </li>
+      <li>
+        <strong>End of Work:</strong> {{ record.endOfWork }}
+      </li>
+      <li>
+        <strong>Time Worked (minutes):</strong> {{ record.timeWorkedInMinutes }}
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+
