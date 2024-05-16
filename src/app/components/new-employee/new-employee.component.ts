@@ -31,24 +31,24 @@ export class NewEmployeeComponent {
   }
 
   register() {
-    // Cria um novo objeto Employee com os dados do formulário
+
     const newEmployee: Employee = {
       id: null,
       name: this.username,
       workTime: [] // Preencha com os dados apropriados se necessário
     };
 
-    // Chama o serviço para adicionar o novo usuário
+
     this.employeeService.addEmployee(newEmployee)
       .subscribe(
         (response) => {
           console.log('Usuário criado com sucesso:', response);
-          // Redireciona para a página de colaborador após o registro bem-sucedido
+
           this.navigateTo(this.linkUrlColaborador);
         },
         (error) => {
           console.error('Erro ao criar usuário:', error);
-          // Trate o erro apropriadamente (por exemplo, exibindo uma mensagem de erro para o usuário)
+
         }
       );
   }

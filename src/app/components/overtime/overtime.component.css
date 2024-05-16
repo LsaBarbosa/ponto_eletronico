@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Isso garante que o container ocupe toda a altura da tela */
+  height: 100vh;
 }
 
 
@@ -63,5 +63,44 @@ input[type="date"] {
   text-align: center;
   gap: 3em;
   padding-top: 3em ;
+}
+
+
+.card {
+  display: flex;
+  flex-direction: row;
+  width: 9em;
+  height: 7em;
+  border: 1px solid #ccc;
+  border-radius: 3em;
+  padding: 20px;
+  margin: 0 auto;
+  margin-top: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: orange;
+}
+
+.card-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.card h2 {
+  margin-top: 0;
+}
+
+.card ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.card li {
+  margin-bottom: 5px;
+}
+
+.card li:last-child {
+  margin-bottom: 0;
 }
 @media(max-width:800px) {}

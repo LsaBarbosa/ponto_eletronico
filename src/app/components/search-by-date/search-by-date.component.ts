@@ -37,8 +37,8 @@ export class SearchByDateComponent {
 
   public searchByDate(): void {
     if (this.startDate && this.endDate && this.username) {
-      const startDateString = this.startDate.toString().split('T')[0]; // Convertendo para string no formato "YYYY-MM-DD"
-      const endDateString = this.endDate.toString().split('T')[0]; // Convertendo para string no formato "YYYY-MM-DD"
+      const startDateString = this.startDate.toString().split('T')[0];
+      const endDateString = this.endDate.toString().split('T')[0];
       this.recordWorkTimeService.searchRecordsByDateRange(this.username, startDateString, endDateString)
         .subscribe(
           (records: RecordWorkTime[]) => {

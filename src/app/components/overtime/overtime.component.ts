@@ -1,42 +1,65 @@
-import { Component } from '@angular/core';
-import {ButtonComponent} from "../button/button.component";
+import {Component} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {ButtonComponent} from "../button/button.component";
 import {Router} from "@angular/router";
+import {RecordWorkTime} from "../../model/RecordWorkTime";
+import {HttpErrorResponse} from "@angular/common/http";
+import {RecordWorkTimeService} from "../../service/record-work-time.service";
+import {RecordWorkTimeModule} from "../../../module/record-work-time.module";
+import {DatePipe, NgForOf, NgIf} from "@angular/common";
+import {dateTimestampProvider} from "rxjs/internal/scheduler/dateTimestampProvider";
+
 
 @Component({
   selector: 'app-overtime',
   standalone: true,
     imports: [
-        ButtonComponent,
-        FormsModule,
-        ReactiveFormsModule
+      FormsModule,
+      ReactiveFormsModule,
+      ButtonComponent,
+      RecordWorkTimeModule,
+      DatePipe,
+      NgForOf,
+      NgIf,
+
     ],
   templateUrl: './overtime.component.html',
   styleUrl: './overtime.component.css'
 })
 export class OvertimeComponent {
 
+  username: string = '';
+  startDate: Date = new Date();
+  endDate: Date = new Date();
   linkUrlRegistros: string = '/registros';
+  records: RecordWorkTime[] = [];
+  totalOvertime: string='';
 
-  constructor(private router: Router) {}
+  constructor(private recordWorkTimeService: RecordWorkTimeService, private router: Router) {
+  }
+
+  public searchByOvertime(): void {
+    if (this.startDate && this.endDate && this.username) {
+      const startDateString = this.startDate.toString().split('T')[0];
+      const endDateString = this.endDate.toString().split('T')[0];
+      this.recordWorkTimeService.calculateOvertimeByDateRange(this.username, startDateString, endDateString)
+        .subscribe(
+          (response: { totalOvertime: string }) => {
+            this.totalOvertime = response.totalOvertime;
+          },
+          (error: HttpErrorResponse) => {
+            alert(error.message);
+          }
+        );
+    } else {
+      alert('Por favor, preencha todos os campos.');
+    }
+  }
 
   navigateTo(url: string) {
     this.router.navigate([url]);
   }
 
-  username: string = '';
-  startDate: string = '';
-  endDate: string = '';
-  searchOvertime() {
-
-    console.log('Username:', this.username);
-    console.log('startDate:', this.startDate);
-    console.log('endDate:', this.endDate);
-    if (this.username === 'admin' && this.startDate === 'admin123') {
-      console.log('Login bem-sucedido!');
-    } else {
-      console.log('Credenciais inválidas. Tente novamente.');
-
-    }
-  }
+  protected readonly dateTimestampProvider = dateTimestampProvider;
+  protected readonly DatePipe = DatePipe;
 }

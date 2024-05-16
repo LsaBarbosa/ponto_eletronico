@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {environment} from "../environments/environment";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {catchError, Observable, throwError} from "rxjs";
+import { Observable, throwError} from "rxjs";
 import {RecordWorkTime} from "../model/RecordWorkTime";
 
 @Injectable({
@@ -26,12 +26,16 @@ export class RecordWorkTimeService {
     return this.http.post<RecordWorkTime>(`${this.apiServeUrl}/ponto/saida`, null, {params});
   }
 
-  public calculateOvertimeByDateRange(name: string, startDate: Date, endDate: Date): Observable<RecordWorkTime> {
-    const params = new HttpParams()
-      .set('name', name)
-      .set('dataInicial', startDate.toISOString())
-      .set('dataFinal', endDate.toISOString());
-    return this.http.get<RecordWorkTime>(`${this.apiServeUrl}/ponto/horas-extras`, {params});
+  public calculateOvertimeByDateRange(name: string, startDate: string | null, endDate: string | null): Observable<{ totalOvertime: string }> {
+    if (startDate && endDate) {
+      const params = new HttpParams()
+        .set('name', name)
+        .set('dataInicial', startDate) // Alteração aqui
+        .set('dataFinal', endDate); // Alteração aqui
+      return this.http.get<{ totalOvertime: string }>(`${this.apiServeUrl}/ponto/horas-extras`, {params});
+    } else {
+      return throwError('startDate and endDate must be provided.');
+    }
   }
 
   public searchRecordsByDateRange(name: string, startDate: string | null, endDate: string | null): Observable<RecordWorkTime[]> {
