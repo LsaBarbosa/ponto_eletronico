@@ -68,7 +68,7 @@ input[type="date"] {
 .card {
   display: flex;
   flex-direction: row;
-  width: 9em;
+  width: 15em;
   height: 7em;
   border: 1px solid #ccc;
   border-radius: 3em;

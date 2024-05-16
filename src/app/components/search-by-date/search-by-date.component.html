@@ -25,25 +25,25 @@
     <app-button class="button" (click)="navigateTo(linkUrlRegistros)">Voltar</app-button>
   </div>
 
-<div *ngIf="records.length > 0">
-  <h2>Registros encontrados:</h2>
-  <div *ngFor="let record of records" class="card">
-    <div class="card-text">
-    <ul>
 
-      <li>
-        <strong>Inicio da Jornada:</strong> {{ record.startOfWork }}
-      </li>
-      <li>
-        <strong>Final da Jornada:</strong> {{ record.endOfWork }}
-      </li>
-      <li>
-        <strong>Tempo trabalhado :</strong> {{ record.timeWorkedInMinutes }}
-      </li>
-    </ul>
+  <div *ngIf="records.length > 0">
+    <h2>Registros encontrados:</h2>
+    <div *ngFor="let record of records" class="card">
+      <div class="card-text">
+        <ul>
+          <li>
+            <strong>Início da Jornada:</strong> {{ record.startOfWork | date: 'dd-MM-yyyy HH:mm' }}
+          </li>
+          <li>
+            <strong>Final da Jornada:</strong> {{ record.endOfWork | date: 'dd-MM-yyyy HH:mm' }}
+          </li>
+          <li>
+            <strong>Tempo trabalhado:</strong> {{ record.timeWorked }}
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
 </div>
 
 
