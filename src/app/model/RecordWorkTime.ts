@@ -4,6 +4,7 @@ export interface RecordWorkTime {
   id: number;
   startOfWork: Date ;
   endOfWork: Date  ;
-  timeWorkedInMinutes: number  ;
+  timeWorkedInMinutes: string  ;
   employee: Employee  ;
+  overtime:string;
 }
