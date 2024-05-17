@@ -68,24 +68,32 @@ input[type="date"] {
 .card {
   display: flex;
   flex-direction: row;
-  width: 15em;
+  width: 18em;
   height: 7em;
-  border: 1px solid #ccc;
+  border: 1px solid #000000;
   border-radius: 3em;
-  padding: 20px;
+  padding: 1em;
   margin: 0 auto;
   margin-top: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: orange;
 }
 
-.card-text {
+.card-text,
+.card-titulo{
   display: flex;
   align-items: center;
   justify-content: center;
   flex-grow: 1;
+  line-height: 1.2em;
+  font-size: 1.2em;
 }
 
+.card-titulo{
+font-weight: bold;
+  font-size: 1.5em;
+  padding-top: 0.5em;
+}
 
 .card h2 {
   margin-top: 0;

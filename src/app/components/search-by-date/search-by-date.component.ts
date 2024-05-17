@@ -31,7 +31,7 @@ export class SearchByDateComponent {
   endDate: Date = new Date();
   linkUrlRegistros: string = '/registros';
   records: RecordWorkTime[] = [];
-
+  searchPerformed: boolean = false;
   constructor(private recordWorkTimeService: RecordWorkTimeService, private router: Router) {
   }
 
@@ -43,6 +43,7 @@ export class SearchByDateComponent {
         .subscribe(
           (records: RecordWorkTime[]) => {
             this.records = records;
+            this.searchPerformed = true;
           },
           (error: HttpErrorResponse) => {
             alert(error.message);
