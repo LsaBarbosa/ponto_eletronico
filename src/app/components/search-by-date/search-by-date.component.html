@@ -25,9 +25,9 @@
     <app-button class="button" (click)="navigateTo(linkUrlRegistros)">Voltar</app-button>
   </div>
 
-
-  <div *ngIf="records.length > 0">
-    <h2>Registros encontrados:</h2>
+  <div *ngIf="searchPerformed">
+  <div *ngIf="records.length > 0; else noRecordsFound">
+    <h2 class="card-titulo">Registros encontrados</h2>
     <div *ngFor="let record of records" class="card">
       <div class="card-text">
         <ul>
@@ -45,5 +45,7 @@
     </div>
   </div>
 </div>
-
-
+<ng-template class="card-titulo" #noRecordsFound>
+  <p class="card-titulo" >Nenhum Ponto foi batido nesse intervalo de data.</p>
+</ng-template>
+</div>
