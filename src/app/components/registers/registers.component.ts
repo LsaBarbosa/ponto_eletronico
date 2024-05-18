@@ -29,7 +29,7 @@ export class RegistersComponent implements OnInit{
   }
 
   ngOnInit() {
-    // Pegar o nome de usuário dos parâmetros da rota
+
     this.route.queryParams.subscribe(params => {
       this.username = params['username'];
     });

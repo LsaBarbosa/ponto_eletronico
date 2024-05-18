@@ -31,7 +31,7 @@ export class LoginComponent {
   }
 
   login() {
-    // Navegar para a rota do colaborador passando o nome de usuário como parâmetro
+
     this.router.navigate([this.linkUrlColaborador], { queryParams: { username: this.username } });
   }
 }

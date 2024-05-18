@@ -35,7 +35,7 @@ export class NewEmployeeComponent {
     const newEmployee: Employee = {
       id: null,
       name: this.username,
-      workTime: [] // Preencha com os dados apropriados se necessário
+      workTime: []
     };
 
 

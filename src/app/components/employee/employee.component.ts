@@ -35,7 +35,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   registerCheckIn() {
-    const name = this.username; // Usando o nome do usuário obtido do parâmetro da rota
+    const name = this.username;
     this.recordWorkTimeService.addCheckin(name).subscribe({
       next: (response) => {
         console.log('Entrada registrada com sucesso', response);
@@ -47,7 +47,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   registerCheckOut() {
-    const name = this.username; // Usando o nome do usuário obtido do parâmetro da rota
+    const name = this.username;
     this.recordWorkTimeService.addCheckout(name).subscribe({
       next: (response) => {
         console.log('Saída registrada com sucesso', response);
@@ -59,7 +59,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Pegar o nome de usuário dos parâmetros da rota
+
     this.route.queryParams.subscribe(params => {
       this.username = params['username'];
     });
