@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {ButtonComponent} from "../button/button.component";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {EmployeeModule} from "../../../module/employee.module";
 import {RecordWorkTimeModule} from "../../../module/record-work-time.module";
 import {NgIf} from "@angular/common";
@@ -28,8 +28,13 @@ export class LoginComponent {
   loginSuccess: boolean = false;
   loginFailure: boolean = false;
 
-  constructor(private router: Router) {}
-
+  constructor(private router: Router, private route: ActivatedRoute) {
+    this.route.queryParams.subscribe(params => {
+      if (params['clearUsername']) {
+        this.username = '';
+      }
+    });
+  }
   navigateTo(url: string) {
     this.router.navigate([url]);
   }

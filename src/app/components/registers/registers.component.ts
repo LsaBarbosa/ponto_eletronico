@@ -11,14 +11,14 @@ import {ActivatedRoute, Router} from "@angular/router";
   templateUrl: './registers.component.html',
   styleUrl: './registers.component.css'
 })
-export class RegistersComponent implements OnInit{
+export class RegistersComponent{
 
   linkUrlCadastrar: string = '/cadastrar';
   linkUrlColaborador: string = '/colaborador';
   linkUrlSair: string = '/';
   linkUrlOvertime: string = '/registros/hora-extra';
   linkUrlRegistros: string = '/registros/por-data';
-  username: string = '';
+
 
   constructor(
     private router: Router,
@@ -29,10 +29,4 @@ export class RegistersComponent implements OnInit{
     this.router.navigate([url]);
   }
 
-  ngOnInit() {
-
-    this.route.queryParams.subscribe(params => {
-      this.username = params['username'];
-    });
-  }
 }
