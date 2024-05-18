@@ -3,13 +3,20 @@
   <form (ngSubmit)="register()">
     <div class="form-group">
       <input type="text" id="username" name="username" [(ngModel)]="username" required>
-      <label class="login-label" for="username">Usuario:</label>
+      <label class="login-label" for="username">Usuário:</label>
     </div>
 
     <div class="buttons">
-    <app-button class="button">Salvar usuário</app-button>
+      <app-button class="button">Salvar usuário</app-button>
     </div>
   </form>
+  <div *ngIf="createUserSuccess" class="success-message">
+    Usuário criado com sucesso!
+  </div>
+  <div *ngIf="createUserFailure && errorMessage" class="failure-message">
+    {{ errorMessage }}
+  </div>
+
   <div class="buttons-registrar">
     <app-button class="button" (click)="navigateTo(linkUrlColaborador)">Voltar</app-button>
   </div>

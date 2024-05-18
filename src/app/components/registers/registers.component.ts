@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ButtonComponent} from "../button/button.component";
 import {ActivatedRoute, Router} from "@angular/router";
 
@@ -22,7 +22,7 @@ export class RegistersComponent{
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute
+
   ) {}
 
   navigateTo(url: string) {
