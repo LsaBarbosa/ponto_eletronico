@@ -27,4 +27,21 @@ h1{
   gap: 0.5em;
   padding-top: 5em ;
 }
+.success-message, .failure-message {
+  margin-top: 1em;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.success-message {
+  background-color: #4CAF50;
+  color: #ffffff;
+}
+
+.failure-message {
+  background-color: #f44336;
+  color: #ffffff;
+}
+
 @media(max-width:800px) {}

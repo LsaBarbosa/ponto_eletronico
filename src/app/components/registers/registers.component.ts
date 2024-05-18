@@ -14,6 +14,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class RegistersComponent implements OnInit{
 
   linkUrlCadastrar: string = '/cadastrar';
+  linkUrlColaborador: string = '/colaborador';
   linkUrlSair: string = '/';
   linkUrlOvertime: string = '/registros/hora-extra';
   linkUrlRegistros: string = '/registros/por-data';

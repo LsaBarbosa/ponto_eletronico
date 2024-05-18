@@ -23,7 +23,7 @@ h1{
   flex-direction: row;
   font-size: 0.9em;
   text-align: center;
-  gap: 3em;
-  padding-top: 5em ;
+  gap: 1em;
+  padding-top: 3em ;
 }
 @media(max-width:800px) {}

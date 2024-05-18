@@ -4,6 +4,7 @@ import {ButtonComponent} from "../button/button.component";
 import {Router} from "@angular/router";
 import {EmployeeModule} from "../../../module/employee.module";
 import {RecordWorkTimeModule} from "../../../module/record-work-time.module";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,8 @@ import {RecordWorkTimeModule} from "../../../module/record-work-time.module";
     ButtonComponent,
     EmployeeModule,
     RecordWorkTimeModule,
-    FormsModule
+    FormsModule,
+    NgIf
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -23,6 +25,8 @@ export class LoginComponent {
 
   username: string = '';
   password: string = '';
+  loginSuccess: boolean = false;
+  loginFailure: boolean = false;
 
   constructor(private router: Router) {}
 
@@ -32,6 +36,13 @@ export class LoginComponent {
 
   login() {
 
-    this.router.navigate([this.linkUrlColaborador], { queryParams: { username: this.username } });
+    if (this.username !== '' && this.password !== '') {
+      this.loginSuccess = true;
+      this.loginFailure = false;
+      this.router.navigate([this.linkUrlColaborador], { queryParams: { username: this.username } });
+    } else {
+      this.loginSuccess = false;
+      this.loginFailure = true;
+    }
   }
 }

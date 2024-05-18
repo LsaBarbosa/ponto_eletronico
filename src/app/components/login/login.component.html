@@ -15,4 +15,6 @@
       <app-button type="submit" >Entrar</app-button>
     </div>
   </form>
+  <div *ngIf="loginSuccess" class="success-message">Login realizado com sucesso!</div>
+  <div *ngIf="loginFailure" class="failure-message">Usuário ou senha inválidos. Por favor, tente novamente.</div>
 </div>

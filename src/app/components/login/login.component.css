@@ -50,5 +50,24 @@ input[type="password"] {
   justify-content: center;
   gap: 0.3em;
 }
+/* Adicione estas regras ao seu arquivo login.component.css */
+
+.success-message, .failure-message {
+  margin-top: 1em;
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
+  font-size: 1.2em;
+  text-align: center;
+}
+
+.success-message {
+  background-color: #4CAF50; /* Verde */
+  color: white;
+}
+
+.failure-message {
+  background-color: #f44336; /* Vermelho */
+  color: white;
+}
 
 @media(max-width:800px) {}
