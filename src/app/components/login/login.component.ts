@@ -2,43 +2,36 @@ import { Component } from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {ButtonComponent} from "../button/button.component";
 import {Router} from "@angular/router";
+import {EmployeeModule} from "../../../module/employee.module";
+import {RecordWorkTimeModule} from "../../../module/record-work-time.module";
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
     FormsModule,
-    ButtonComponent
+    ButtonComponent,
+    EmployeeModule,
+    RecordWorkTimeModule,
+    FormsModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  linkUrlColaborador:string = "/colaborador";
-  constructor(private router: Router) {
+  linkUrlColaborador: string = "/colaborador";
 
-  }
+  username: string = '';
+  password: string = '';
 
+  constructor(private router: Router) {}
 
   navigateTo(url: string) {
     this.router.navigate([url]);
   }
 
-
-  username: string = '';
-  password: string = '';
-
   login() {
-
-    console.log('Username:', this.username);
-    console.log('Password:', this.password);
-
-    if (this.username === 'admin' && this.password === 'admin123') {
-      console.log('Login bem-sucedido!');
-
-    } else {
-      console.log('Credenciais inválidas. Tente novamente.');
-
-    }
+    // Navegar para a rota do colaborador passando o nome de usuário como parâmetro
+    this.router.navigate([this.linkUrlColaborador], { queryParams: { username: this.username } });
   }
 }
