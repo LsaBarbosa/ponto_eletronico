@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {ButtonComponent} from "../button/button.component";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-registers',
