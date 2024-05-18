@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Colaborador</h1>
+  <h1>{{ username }}</h1>
   <div class="buttons-register">
     <app-button class="button" (click)="navigateTo(linkUrlRegistros)">Buscar Registros</app-button>
     <app-button class="button" (click)="navigateTo(linkUrlOvertime)">Horas Extras</app-button>
@@ -7,6 +7,5 @@
   <div class="buttons-logout">
     <app-button class="button" (click)="navigateTo(linkUrlCadastrar)">Criar usuário</app-button>
     <app-button class="button" (click)="navigateTo(linkUrlSair)">Sair</app-button>
-
   </div>
 </div>

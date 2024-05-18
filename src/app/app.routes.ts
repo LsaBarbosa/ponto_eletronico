@@ -9,29 +9,29 @@ import {OvertimeComponent} from "./components/overtime/overtime.component";
 export const routes: Routes = [
   {
     path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  },
+  {
+    path: 'login',
     component: LoginComponent,
   },
-
   {
     path: 'colaborador',
     component: EmployeeComponent,
   },
-
   {
     path: 'registros',
     component: RegistersComponent,
   },
-
   {
     path: 'cadastrar',
     component: NewEmployeeComponent,
   },
-
   {
     path: 'registros/por-data',
     component: SearchByDateComponent,
   },
-
   {
     path: 'registros/hora-extra',
     component: OvertimeComponent,
