@@ -5,6 +5,7 @@ import {RecordWorkTimeService} from "../../service/record-work-time.service";
 import {EmployeeModule} from "../../../module/employee.module";
 import {RecordWorkTimeModule} from "../../../module/record-work-time.module";
 import {FormsModule} from "@angular/forms";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-employee',
@@ -13,7 +14,8 @@ import {FormsModule} from "@angular/forms";
     ButtonComponent,
     EmployeeModule,
     RecordWorkTimeModule,
-    FormsModule
+    FormsModule,
+    NgIf
   ],
   templateUrl: './employee.component.html',
   styleUrl: './employee.component.css'
@@ -23,6 +25,8 @@ export class EmployeeComponent implements OnInit {
   linkUrlSair: string = '/';
   linkUrlRegistros: string = '/registros';
   username: string = '';
+  registerSuccess: boolean = false;
+  registerFailure: boolean = false;
 
   constructor(
     private router: Router,
@@ -39,9 +43,13 @@ export class EmployeeComponent implements OnInit {
     this.recordWorkTimeService.addCheckin(name).subscribe({
       next: (response) => {
         console.log('Entrada registrada com sucesso', response);
+        this.registerSuccess = true;
+        this.registerFailure = false;
       },
       error: (error) => {
         console.error('Erro ao registrar entrada', error);
+        this.registerSuccess = false;
+        this.registerFailure = true;
       }
     });
   }
@@ -51,12 +59,17 @@ export class EmployeeComponent implements OnInit {
     this.recordWorkTimeService.addCheckout(name).subscribe({
       next: (response) => {
         console.log('Saída registrada com sucesso', response);
+        this.registerSuccess = true;
+        this.registerFailure = false;
       },
       error: (error) => {
         console.error('Erro ao registrar saída', error);
+        this.registerSuccess = false;
+        this.registerFailure = true;
       }
     });
   }
+
 
   ngOnInit() {
 
