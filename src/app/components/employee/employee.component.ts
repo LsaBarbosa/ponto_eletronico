@@ -6,6 +6,7 @@ import {EmployeeModule} from "../../../module/employee.module";
 import {RecordWorkTimeModule} from "../../../module/record-work-time.module";
 import {FormsModule} from "@angular/forms";
 import {NgIf} from "@angular/common";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-employee',
@@ -27,15 +28,18 @@ export class EmployeeComponent implements OnInit {
   username: string = '';
   registerSuccess: boolean = false;
   registerFailure: boolean = false;
+  errorMessageTimeout: any;
+  errorMessage: string = '';
 
   constructor(
     private router: Router,
     private recordWorkTimeService: RecordWorkTimeService,
     private route: ActivatedRoute
-  ) {}
+  ) {
+  }
 
   navigateTo(url: string) {
-    this.router.navigate([url], { queryParams: { username: this.username } });
+    this.router.navigate([url], {queryParams: {username: this.username}});
   }
 
   registerCheckIn() {
@@ -45,11 +49,13 @@ export class EmployeeComponent implements OnInit {
         console.log('Entrada registrada com sucesso', response);
         this.registerSuccess = true;
         this.registerFailure = false;
+
       },
-      error: (error) => {
-        console.error('Erro ao registrar entrada', error);
+      error: (error: HttpErrorResponse) => {
         this.registerSuccess = false;
         this.registerFailure = true;
+        this.errorMessage = this.getErrorMessage(error, 'entrada');
+        this.resetErrorMessage();
       }
     });
   }
@@ -66,10 +72,33 @@ export class EmployeeComponent implements OnInit {
         console.error('Erro ao registrar saída', error);
         this.registerSuccess = false;
         this.registerFailure = true;
+        this.errorMessage = this.getErrorMessage(error, 'saída');
+        this.resetErrorMessage();
       }
     });
   }
 
+  getErrorMessage(error: HttpErrorResponse, action: string): string {
+    if (error.status === 404) {
+      return `Colaborador não cadastrado`;
+
+    } else if (error.status === 400) {
+      if (action === 'entrada') {
+        return 'Registro de Saída não registrado, encerre o registro de entrada aberto';
+
+      } else if (action === 'saída') {
+        return 'Não há registro de entrada para o colaborador, registre sua entrada';
+      }
+    }
+    return `Falha ao registrar ${action}`;
+  }
+
+  resetErrorMessage() {
+    this.errorMessageTimeout = setTimeout(() => {
+      this.registerFailure = false;
+      this.errorMessage = '';
+    }, 5000); // Tempo em milissegundos (5 segundos)
+  }
 
   ngOnInit() {
 

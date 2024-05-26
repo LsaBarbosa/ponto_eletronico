@@ -8,12 +8,11 @@
     Registro realizado com sucesso!
   </div>
   <div *ngIf="registerFailure" class="failure-message">
-    Falha ao realizar o registro
+    {{ errorMessage }}
   </div>
   <div class="buttons-logout">
     <app-button class="button" (click)="navigateTo(linkUrlCadastrar)">Criar usuário</app-button>
     <app-button class="button" (click)="navigateTo(linkUrlSair)">Sair</app-button>
     <app-button class="button" (click)="navigateTo(linkUrlRegistros)">Registros</app-button>
   </div>
-
 </div>

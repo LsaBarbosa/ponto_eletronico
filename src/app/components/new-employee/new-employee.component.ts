@@ -6,6 +6,7 @@ import {EmployeeModule} from "../../../module/employee.module";
 import {EmployeeService} from "../../service/employee.service";
 import {Employee} from "../../model/Employee";
 import {NgIf} from "@angular/common";
+import {HttpErrorResponse} from "@angular/common/http";
 
 
 @Component({
@@ -43,10 +44,7 @@ export class NewEmployeeComponent implements OnDestroy{
       this.createUserSuccess = false;
       this.createUserFailure = true;
       this.errorMessage = 'Usuário não pode ser nulo';
-      this.errorMessageTimeout = setTimeout(() => {
-        this.createUserFailure = false;
-        this.errorMessage = '';
-      }, 5000); // Tempo em milissegundos (5 segundos)
+      this.resetErrorMessage();
       return;
     }
 
@@ -64,18 +62,35 @@ export class NewEmployeeComponent implements OnDestroy{
           this.createUserFailure = false;
 
         },
-        (error) => {
+        (error: HttpErrorResponse) => {
           console.error('Erro ao criar usuário:', error);
           this.createUserSuccess = false;
           this.createUserFailure = true;
-          this.errorMessage = 'Usuário com acesso não permitido';
-          this.errorMessageTimeout = setTimeout(() => {
-            this.createUserFailure = false;
-            this.errorMessage = '';
-          }, 5000); // Tempo em milissegundos (5 segundos)
+          this.errorMessage = this.getErrorMessage(error);
+          this.resetErrorMessage();
         }
       );
   }
+
+  getErrorMessage(error: HttpErrorResponse): string {
+    if (error.status === 403) {
+      return 'Usuário com acesso não permitido';
+    } else {
+      return 'Falha ao criar usuário';
+    }
+  }
+
+  resetErrorMessage() {
+    if (this.errorMessageTimeout) {
+      clearTimeout(this.errorMessageTimeout);
+    }
+    this.errorMessageTimeout = setTimeout(() => {
+      this.createUserFailure = false;
+      this.errorMessage = '';
+    }, 5000);
+  }
+
+
   ngOnDestroy() {
     if (this.errorMessageTimeout) {
       clearTimeout(this.errorMessageTimeout);
