@@ -1,12 +1,19 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component} from '@angular/core';
 import {ButtonComponent} from "../button/button.component";
-import {FormsModule} from "@angular/forms";
-import {Router} from "@angular/router";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {EmployeeModule} from "../../../module/employee.module";
-import {EmployeeService} from "../../service/employee.service";
-import {Employee} from "../../model/Employee";
 import {NgIf} from "@angular/common";
-import {HttpErrorResponse} from "@angular/common/http";
+import {LogoutComponent} from "../logout/logout.component";
+import {PrimaryInputComponent} from "../primary-input/primary-input.component";
+import {LoginService} from "../../service/login.service";
+import {BackButtonComponent} from "../button/back-button/back-button.component";
+import {BrowserModule} from "@angular/platform-browser";
+
+interface SignupForm {
+  name: FormControl<string>;
+  password: FormControl<string>;
+  role: FormControl<string>;
+}
 
 
 @Component({
@@ -18,83 +25,46 @@ import {HttpErrorResponse} from "@angular/common/http";
     ButtonComponent,
     FormsModule,
     EmployeeModule,
-    NgIf
+    ReactiveFormsModule,
+    PrimaryInputComponent,
+    NgIf,
+    LogoutComponent,
+    BackButtonComponent,
   ],
 })
-export class NewEmployeeComponent implements OnDestroy{
-  linkUrlColaborador: string = '/colaborador';
-  username: string = '';
-  createUserSuccess: boolean = false;
-  createUserFailure: boolean = false;
-  errorMessageTimeout: any;
-  errorMessage: string = '';
-
+export class NewEmployeeComponent {
+  signupForm!: FormGroup<SignupForm>;
+  successMessage: string | null = null;
+  errorMessage: string | null = null;
 
   constructor(
-    private router: Router,
-    private employeeService: EmployeeService
-  ) {}
-
-
-  navigateTo(url: string) {
-    this.router.navigate([url]);
+    private loginService: LoginService,
+  ) {
+    this.signupForm = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      password: new FormControl('', [Validators.required]),
+      role: new FormControl('', [Validators.required])
+    } as SignupForm);
   }
-  register() {
-    if (!this.username.trim()) {
-      this.createUserSuccess = false;
-      this.createUserFailure = true;
-      this.errorMessage = 'Usuário não pode ser nulo';
-      this.resetErrorMessage();
-      return;
-    }
 
-    const newEmployee: Employee = {
-      id: null,
-      name: this.username,
-      workTime: []
-    };
-
-    this.employeeService.addEmployee(newEmployee)
-      .subscribe(
-        (response) => {
-          console.log('Usuário criado com sucesso:', response);
-          this.createUserSuccess = true;
-          this.createUserFailure = false;
+  submit() {
+    this.successMessage = null;
+    this.errorMessage = null;
+    if (this.signupForm.valid) {
+      this.loginService.signup(
+        this.signupForm.value.name!,
+        this.signupForm.value.password!,
+        this.signupForm.value.role!
+      ).subscribe({
+        next: () => {
+          this.successMessage = 'Cadastro feito com sucesso!';
 
         },
-        (error: HttpErrorResponse) => {
-          console.error('Erro ao criar usuário:', error);
-          this.createUserSuccess = false;
-          this.createUserFailure = true;
-          this.errorMessage = this.getErrorMessage(error);
-          this.resetErrorMessage();
+        error: () => {
+          this.errorMessage = 'Erro inesperado! Tente novamente';
+
         }
-      );
-  }
-
-  getErrorMessage(error: HttpErrorResponse): string {
-    if (error.status === 403) {
-      return 'Usuário com acesso não permitido';
-    } else {
-      return 'Falha ao criar usuário';
+      });
     }
   }
-
-  resetErrorMessage() {
-    if (this.errorMessageTimeout) {
-      clearTimeout(this.errorMessageTimeout);
-    }
-    this.errorMessageTimeout = setTimeout(() => {
-      this.createUserFailure = false;
-      this.errorMessage = '';
-    }, 5000);
-  }
-
-
-  ngOnDestroy() {
-    if (this.errorMessageTimeout) {
-      clearTimeout(this.errorMessageTimeout);
-    }
-  }
-
 }
