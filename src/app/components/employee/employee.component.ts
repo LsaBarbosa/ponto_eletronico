@@ -7,6 +7,7 @@ import {RecordWorkTimeModule} from "../../../module/record-work-time.module";
 import {FormsModule} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {HttpErrorResponse} from "@angular/common/http";
+import {LogoutComponent} from "../logout/logout.component";
 
 @Component({
   selector: 'app-employee',
@@ -16,17 +17,18 @@ import {HttpErrorResponse} from "@angular/common/http";
     EmployeeModule,
     RecordWorkTimeModule,
     FormsModule,
-    NgIf
+    NgIf,
+    LogoutComponent
   ],
   templateUrl: './employee.component.html',
   styleUrl: './employee.component.css'
 })
 export class EmployeeComponent implements OnInit {
   linkUrlCadastrar: string = '/cadastrar';
-  linkUrlSair: string = '/';
   linkUrlRegistros: string = '/registros';
   username: string = '';
-  registerSuccess: boolean = false;
+  registerSuccessCheckIn: boolean = false;
+  registerSuccessCheckOut: boolean = false;
   registerFailure: boolean = false;
   errorMessageTimeout: any;
   errorMessage: string = '';
@@ -34,9 +36,7 @@ export class EmployeeComponent implements OnInit {
   constructor(
     private router: Router,
     private recordWorkTimeService: RecordWorkTimeService,
-    private route: ActivatedRoute
-  ) {
-  }
+  ) {}
 
   navigateTo(url: string) {
     this.router.navigate([url], {queryParams: {username: this.username}});
@@ -47,12 +47,12 @@ export class EmployeeComponent implements OnInit {
     this.recordWorkTimeService.addCheckin(name).subscribe({
       next: (response) => {
         console.log('Entrada registrada com sucesso', response);
-        this.registerSuccess = true;
+        this.registerSuccessCheckIn = true;
+        this.registerSuccessCheckOut = false;
         this.registerFailure = false;
-
       },
       error: (error: HttpErrorResponse) => {
-        this.registerSuccess = false;
+        this.registerSuccessCheckIn = false;
         this.registerFailure = true;
         this.errorMessage = this.getErrorMessage(error, 'entrada');
         this.resetErrorMessage();
@@ -65,12 +65,13 @@ export class EmployeeComponent implements OnInit {
     this.recordWorkTimeService.addCheckout(name).subscribe({
       next: (response) => {
         console.log('Saída registrada com sucesso', response);
-        this.registerSuccess = true;
+        this.registerSuccessCheckOut = true;
+        this.registerSuccessCheckIn = false;
         this.registerFailure = false;
       },
       error: (error) => {
         console.error('Erro ao registrar saída', error);
-        this.registerSuccess = false;
+        this.registerSuccessCheckOut = false;
         this.registerFailure = true;
         this.errorMessage = this.getErrorMessage(error, 'saída');
         this.resetErrorMessage();
@@ -81,13 +82,11 @@ export class EmployeeComponent implements OnInit {
   getErrorMessage(error: HttpErrorResponse, action: string): string {
     if (error.status === 404) {
       return `Colaborador não cadastrado`;
-
     } else if (error.status === 400) {
       if (action === 'entrada') {
-        return 'Registro de Saída não registrado, encerre o registro de entrada aberto';
-
+        return 'Registro de Saída não registrado';
       } else if (action === 'saída') {
-        return 'Não há registro de entrada para o colaborador, registre sua entrada';
+        return 'Não há registro de entrada';
       }
     }
     return `Falha ao registrar ${action}`;
@@ -97,13 +96,15 @@ export class EmployeeComponent implements OnInit {
     this.errorMessageTimeout = setTimeout(() => {
       this.registerFailure = false;
       this.errorMessage = '';
-    }, 5000); // Tempo em milissegundos (5 segundos)
+    }, 2000); // Tempo em milissegundos (2 segundos)
   }
 
   ngOnInit() {
-
-    this.route.queryParams.subscribe(params => {
-      this.username = params['username'];
-    });
+    const storedUsername = sessionStorage.getItem('username');
+    if (storedUsername) {
+      this.username = storedUsername;
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 }

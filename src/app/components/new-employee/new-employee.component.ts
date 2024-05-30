@@ -7,7 +7,6 @@ import {LogoutComponent} from "../logout/logout.component";
 import {PrimaryInputComponent} from "../primary-input/primary-input.component";
 import {LoginService} from "../../service/login.service";
 import {BackButtonComponent} from "../button/back-button/back-button.component";
-import {BrowserModule} from "@angular/platform-browser";
 
 interface SignupForm {
   name: FormControl<string>;

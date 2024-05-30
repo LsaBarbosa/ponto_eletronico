@@ -1,6 +1,6 @@
 <div class="container">
   <div class="titulo">
-    <h1>Ponto Eletrônico</h1>
+    <h1>Buscar Registro</h1>
   </div>
   <form (ngSubmit)="searchByDate()">
     <div class="form-group">
@@ -22,7 +22,7 @@
     </div>
   </form>
   <div class="buttons-buscar">
-    <app-button class="button" (click)="navigateTo(linkUrlRegistros)">Voltar</app-button>
+    <app-back-button class="button" (click)="navigateTo(linkUrlRegistros)">Voltar</app-back-button>
   </div>
 
   <div *ngIf="searchPerformed">

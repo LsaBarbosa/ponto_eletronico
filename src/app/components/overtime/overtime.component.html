@@ -22,8 +22,12 @@
     </div>
   </form>
   <div class="buttons-buscar">
-    <app-button class="button" (click)="navigateTo(linkUrlRegistros)">Voltar</app-button>
+    <app-back-button/>
   </div>
+    <div class="logout">
+      <app-logout></app-logout>
+    </div>
+
 <div *ngIf="totalOvertime" class="card">
   <div class="card-text">
     <strong>Hora Extra:</strong>{{ totalOvertime }}

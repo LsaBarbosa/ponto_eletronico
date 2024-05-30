@@ -1,27 +1,15 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-
 .titulo {
   display: flex;
+  justify-content: center;
   text-align: center;
   padding-bottom: 1em;
-  padding-left: 1.5em;
 }
 
-h1 {
-  font-size: 3em;
-
-}
 
 .date-class{
   display: flex;
   flex-direction: row;
+
   gap: 0.5em;
 
 
@@ -56,14 +44,7 @@ input[type="date"] {
   gap: 0.3em;
 }
 
-.buttons-buscar{
-  display: flex;
-  flex-direction: row;
-  font-size: 1em;
-  text-align: center;
-  gap: 3em;
-  padding-top: 3em ;
-}
+
 
 .card {
   display: flex;

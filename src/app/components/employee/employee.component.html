@@ -4,15 +4,22 @@
     <app-button class="button" (click)="registerCheckIn()">Registrar Entrada</app-button>
     <app-button class="button" (click)="registerCheckOut()">Registrar Saída</app-button>
   </div>
-  <div *ngIf="registerSuccess" class="success-message">
-    Registro realizado com sucesso!
+  <div class="msg">
+  <div *ngIf="registerSuccessCheckIn" class="success-message">
+    Entrada realizada com sucesso!
+  </div>
+  <div *ngIf="registerSuccessCheckOut" class="success-message">
+    Saída realizada com sucesso!
   </div>
   <div *ngIf="registerFailure" class="failure-message">
-    {{ errorMessage }}
+    {{errorMessage}}
+  </div>
   </div>
   <div class="buttons-logout">
     <app-button class="button" (click)="navigateTo(linkUrlCadastrar)">Criar usuário</app-button>
-    <app-button class="button" (click)="navigateTo(linkUrlSair)">Sair</app-button>
     <app-button class="button" (click)="navigateTo(linkUrlRegistros)">Registros</app-button>
+  </div>
+  <div class="button-container">
+  <app-logout class="button"/>
   </div>
 </div>
