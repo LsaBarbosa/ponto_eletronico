@@ -1,53 +1,95 @@
-import { Component } from '@angular/core';
-import {FormsModule} from "@angular/forms";
+import {Component} from '@angular/core';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ButtonComponent} from "../button/button.component";
-import {ActivatedRoute, Router} from "@angular/router";
 import {EmployeeModule} from "../../../module/employee.module";
 import {RecordWorkTimeModule} from "../../../module/record-work-time.module";
 import {NgIf} from "@angular/common";
+import {LoginService} from "../../service/login.service";
+import {ToastrService} from 'ngx-toastr';
+import {PrimaryInputComponent} from "../primary-input/primary-input.component";
+import {ActivatedRoute, Router} from "@angular/router";
+import {HttpErrorResponse} from "@angular/common/http";
+
+interface LoginForm {
+  name: FormControl,
+  password: FormControl
+}
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
-    FormsModule,
+    ReactiveFormsModule,
     ButtonComponent,
     EmployeeModule,
     RecordWorkTimeModule,
     FormsModule,
-    NgIf
+    NgIf,
+    PrimaryInputComponent,
+
+  ],
+  providers: [
+    LoginService,
   ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  linkUrlColaborador: string = "/colaborador";
+  registerSuccess: boolean = false;
+  registerFailure: boolean = false;
+  errorMessageTimeout: any;
+  errorMessage: string = '';
+  loginForm!: FormGroup<LoginForm>;
 
-  username: string = '';
-  password: string = '';
-  loginSuccess: boolean = false;
-  loginFailure: boolean = false;
-
-  constructor(private router: Router, private route: ActivatedRoute) {
-    this.route.queryParams.subscribe(params => {
-      if (params['clearUsername']) {
-        this.username = '';
-      }
-    });
-  }
-  navigateTo(url: string) {
-    this.router.navigate([url]);
+  constructor(private loginService: LoginService, private toastService: ToastrService, private router: Router, private route: ActivatedRoute) {
+    this.loginForm = new FormGroup({
+      name: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required,])
+    })
   }
 
-  login() {
-
-    if (this.username !== '' && this.password !== '') {
-      this.loginSuccess = true;
-      this.loginFailure = false;
-      this.router.navigate([this.linkUrlColaborador], { queryParams: { username: this.username } });
-    } else {
-      this.loginSuccess = false;
-      this.loginFailure = true;
+  submit() {
+    if (this.loginForm.valid) {
+      const name = this.loginForm.value.name;
+      const password = this.loginForm.value.password;
+      this.loginService.login(name, password).subscribe({
+        next: () => {
+          this.registerSuccess = true;
+          this.registerFailure = false;
+          sessionStorage.setItem('username', name);
+          this.resetErrorMessage();
+          this.router.navigate(['/colaborador']);
+        },
+        error: (error: HttpErrorResponse) => {
+          this.registerSuccess = false;
+          this.registerFailure = true;
+          this.errorMessage = this.getErrorMessage(error, 'entrada');
+          this.resetErrorMessage();
+        }
+      });
     }
   }
+
+  getErrorMessage(error: HttpErrorResponse, action: string): string {
+    if (error.status === 404) {
+      return `Colaborador não cadastrado`;
+
+    } else if (error.status === 400) {
+      if (action === 'entrada') {
+        return 'Usuário ou senha inválidos';
+
+      } else if (action === 'saída') {
+        return 'Erro inesperado, tente novamente';
+      }
+    }
+    return `Falha ao realizar login${action}`;
+  }
+
+  resetErrorMessage() {
+    this.errorMessageTimeout = setTimeout(() => {
+      this.registerFailure = false;
+      this.errorMessage = '';
+    }, 3000); // Tempo em milissegundos (5 segundos)
+  }
+
 }

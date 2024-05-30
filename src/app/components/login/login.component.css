@@ -1,23 +1,8 @@
-
-.login-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-
 .titulo {
   display: flex;
   text-align: center;
   padding-bottom: 1em;
   padding-left: 1.5em;
-}
-
-h1 {
-  font-size: 3em;
-
 }
 
 .form-group {
@@ -29,28 +14,12 @@ h1 {
 
 }
 
-.login-label {
-  padding-top: 0.5em;
-  font-size: 1.3em;
-  font-weight: bold;
-}
-
-input[type="text"],
-input[type="password"] {
-  padding: 0.8em;
-  font-size: 1.2em;
-
-  border-radius: 2em;
-  border: 1px solid #ccc;
-}
-
-
 .buttons {
   display: flex;
   justify-content: center;
   gap: 0.3em;
 }
-/* Adicione estas regras ao seu arquivo login.component.css */
+/* Adicione estas regras ao seu arquivo register-new-employee.component.css */
 
 .success-message, .failure-message {
   margin-top: 1em;
