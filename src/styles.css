@@ -1,24 +1,29 @@
 @import url(./app/components/reset/reset.css);
 
-
-:root {
-  --titulo: 'Bebas Neue', sans-serif;
-  --texto: 'Montserrat', sans-serif;
-  --azul: #0e9eda;
-  --amarelo: #ffd900;
-  --vermelho: #b71e1e;
-  --branco: #ffffff;
-  --preta: black;
+*{
+  font-family: "Poppins", sans-serif;
 }
-
-
 
 body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.79);
 
-  background-size: cover;
-  background-position: center;
 }
+h1 {
+  font-size: 3em;
+  padding-bottom: 1em;
+  text-align: center;
+  color: #ffffff;
+  font-weight: bolder;
+}
+label{
+  color: #ff6a00;
 
+}
 
 @media(max-width:800px) {
 

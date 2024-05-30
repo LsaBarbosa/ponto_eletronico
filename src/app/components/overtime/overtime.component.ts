@@ -8,21 +8,25 @@ import {RecordWorkTimeService} from "../../service/record-work-time.service";
 import {RecordWorkTimeModule} from "../../../module/record-work-time.module";
 import {DatePipe, NgForOf, NgIf} from "@angular/common";
 import {dateTimestampProvider} from "rxjs/internal/scheduler/dateTimestampProvider";
+import {LogoutComponent} from "../logout/logout.component";
+import {BackButtonComponent} from "../button/back-button/back-button.component";
 
 
 @Component({
   selector: 'app-overtime',
   standalone: true,
-    imports: [
-      FormsModule,
-      ReactiveFormsModule,
-      ButtonComponent,
-      RecordWorkTimeModule,
-      DatePipe,
-      NgForOf,
-      NgIf,
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    ButtonComponent,
+    RecordWorkTimeModule,
+    DatePipe,
+    NgForOf,
+    NgIf,
+    LogoutComponent,
+    BackButtonComponent,
 
-    ],
+  ],
   templateUrl: './overtime.component.html',
   styleUrl: './overtime.component.css'
 })

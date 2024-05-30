@@ -1,16 +1,5 @@
 
-.container{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
 
-h1{
-  font-size: 4em;
-  padding-bottom: 1em;
-}
 .buttons-register{
   display: flex;
   flex-direction: column;
@@ -34,6 +23,11 @@ h1{
   font-weight: bold;
 }
 
+.msg,
+.button-container{
+  display: flex;
+  justify-content: center;
+}
 .success-message {
   background-color: #4CAF50;
   color: #ffffff;

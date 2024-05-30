@@ -5,9 +5,8 @@ import {EmployeeModule} from "../../../module/employee.module";
 import {RecordWorkTimeModule} from "../../../module/record-work-time.module";
 import {NgIf} from "@angular/common";
 import {LoginService} from "../../service/login.service";
-import {ToastrService} from 'ngx-toastr';
 import {PrimaryInputComponent} from "../primary-input/primary-input.component";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
 
 interface LoginForm {
@@ -41,7 +40,7 @@ export class LoginComponent {
   errorMessage: string = '';
   loginForm!: FormGroup<LoginForm>;
 
-  constructor(private loginService: LoginService, private toastService: ToastrService, private router: Router, private route: ActivatedRoute) {
+  constructor(private loginService: LoginService, private router: Router) {
     this.loginForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required,])
