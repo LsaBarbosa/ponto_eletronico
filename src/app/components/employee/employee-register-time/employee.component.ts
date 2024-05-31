@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ButtonComponent} from "../../button/button-default/button.component";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {RecordWorkTimeService} from "../../../service/record-work-time.service";
 import {EmployeeModule} from "../../../../module/employee.module";
 import {RecordWorkTimeModule} from "../../../../module/record-work-time.module";

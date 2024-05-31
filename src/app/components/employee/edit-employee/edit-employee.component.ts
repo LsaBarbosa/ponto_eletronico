@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {ButtonComponent} from "../../button/button-default/button.component";
 import {EmployeeButtonComponent} from "../../button/employee-button/employee-button.component";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {LogoutComponent} from "../../login/logout/logout.component";
 import {NgIf} from "@angular/common";
 import {PrimaryInputComponent} from "../../login/primary-input/primary-input.component";
-import {LoginService} from "../../../service/login.service";
 import {EmployeeService} from "../../../service/employee.service";
+
 interface EditForm {
   name: FormControl<string>;
   password: FormControl<string>;

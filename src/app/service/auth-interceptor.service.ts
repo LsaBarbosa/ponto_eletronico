@@ -20,8 +20,6 @@ export class AuthInterceptorService  implements HttpInterceptor  {
       });
       return next.handle(authReq);
     } else {
-      // Trate o caso em que não há token disponível, por exemplo, redirecionando para a página de login
-      // Ou, simplesmente, deixe a requisição seguir sem o token de autorização
       return next.handle(req);
     }
   }
