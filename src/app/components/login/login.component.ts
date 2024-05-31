@@ -81,7 +81,7 @@ export class LoginComponent {
         return 'Erro inesperado, tente novamente';
       }
     }
-    return `Falha ao realizar login${action}`;
+    return `Erro inesperado no servidor`;
   }
 
   resetErrorMessage() {
