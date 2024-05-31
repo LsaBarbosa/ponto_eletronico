@@ -24,6 +24,8 @@ export class LoginService {
   public signup(name: string, password: string, role: string): Observable<any> {
     return this.http.post<any>(`${this.apiServeUrl}/auth/register`, {name, password, role}).pipe();
   }
+
+
 }
 
 export type LoginResponse = {

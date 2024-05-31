@@ -5,7 +5,8 @@ import {provideToastr} from "ngx-toastr";
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import {TokenInterceptor} from "./service/auth-interceptor.service";
-
+import { NgxPaginationModule } from 'ngx-pagination';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
 
@@ -14,11 +15,8 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([TokenInterceptor])),
     provideToastr(),
     provideAnimations(),
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: AuthInterceptorService,
-    //   multi: true
-    // }
+    NgxPaginationModule, provideAnimationsAsync(),
+
   ]
 };
 

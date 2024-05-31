@@ -6,7 +6,7 @@ import {Router} from "@angular/router";
 import {BackButtonComponent} from "../../button/back-button/back-button.component";
 
 @Component({
-  selector: 'app-emplyee-options',
+  selector: 'app-employee-options',
   standalone: true,
   imports: [
     ButtonComponent,
@@ -14,13 +14,13 @@ import {BackButtonComponent} from "../../button/back-button/back-button.componen
     NgIf,
     BackButtonComponent
   ],
-  templateUrl: './emplyee-options.component.html',
-  styleUrl: './emplyee-options.component.css'
+  templateUrl: './employee-options.component.html',
+  styleUrl: './employee-options.component.css'
 })
-export class EmplyeeOptionsComponent {
+export class EmployeeOptionsComponent {
 
   linkUrlCadastrar: string = '/cadastrar';
-  linkUrlBuscar: string = '/bucar-colaborador';
+  linkUrlBuscar: string = '/buscar-colaborador';
   linkUrlEditar: string = '/editar-colaborador';
   linkUrlDeletar: string = '/deletar-colaborador';
 

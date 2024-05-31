@@ -1,0 +1,27 @@
+<div class="container">
+  <h1>Deletar Colaborador</h1>
+  <form [formGroup]="deleteForm" (ngSubmit)="submit()">
+    <div class="form-group">
+      <app-primary-input
+        formControlName="name"
+        inputName="name"
+        type="text"
+        label="Colaborador"
+        placeholder="Nome do Colaborador"
+      ></app-primary-input>
+      <div class="buttons">
+        <app-button type="submit">Deletar Colaborador</app-button>
+      </div>
+    </div>
+  </form>
+  <div class="msg">
+    <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" class="failure-message">{{ errorMessage }}</div>
+  </div>
+</div>
+<div class="buttons-registrar">
+  <app-employee-button/>
+  <div class="logout">
+    <app-logout></app-logout>
+  </div>
+</div>

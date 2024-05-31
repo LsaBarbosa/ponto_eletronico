@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Employee} from "../model/Employee";
 import {environment} from "../environments/environment";
@@ -15,29 +15,21 @@ export class EmployeeService {
     private http: HttpClient
   ) {
   }
-
-  public getEmployee(): Observable<Employee[]> {
+  getEmployees(): Observable<Employee[]> {
     return this.http.get<Employee[]>(`${this.apiServeUrl}/usuarios`);
   }
 
-  public getEmployeeId(employeeId: number): Observable<Employee> {
-    return this.http.get<Employee>(`${this.apiServeUrl}/usuarios/${employeeId}`);
+  public update(name: string, password: string, role: string): Observable<any> {
+    const params = new HttpParams().set('name', name);
+    const body = { password, role };
+
+    return this.http.put<any>(`${this.apiServeUrl}/usuarios`, body, { params }).pipe();
   }
 
-  public addEmployee(employee: Employee): Observable<Employee> {
-    return this.http.post<Employee>(`${this.apiServeUrl}/usuarios`, employee);
-  }
 
-  public updateEmployee(employee: Employee): Observable<Employee> {
-    return this.http.put<Employee>(
-      `${this.apiServeUrl}/usuarios/update`,
-      employee
-    );
-  }
-
-  public deleteEmployee(employeeId: number): Observable<void> {
+  public deleteEmployee(employeeName: string): Observable<void> {
     return this.http.delete<void>(
-      `${this.apiServeUrl}/usuarios/delete/${employeeId}`
+      `${this.apiServeUrl}/usuarios?name=${employeeName}`
     );
   }
 }

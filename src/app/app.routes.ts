@@ -6,7 +6,9 @@ import {NewEmployeeComponent} from "./components/employee/new-employee/new-emplo
 import {SearchByDateComponent} from "./components/search-by-date/records/search-by-date.component";
 import {OvertimeComponent} from "./components/search-by-date/overtime/overtime.component";
 import {AuthGuardService} from "./service/auth-guard.service";
-import {EmplyeeOptionsComponent} from "./components/employee/emplyee-options/emplyee-options.component";
+import {EmployeeOptionsComponent} from "./components/employee/employee-options/employee-options.component";
+import {EditEmployeeComponent} from "./components/employee/edit-employee/edit-employee.component";
+import {DeleteEmployeeComponent} from "./components/employee/delete-employee/delete-employee.component";
 
 export const routes: Routes = [
   {
@@ -45,7 +47,17 @@ export const routes: Routes = [
   },
   {
     path: 'opcao-colaborador',
-    component: EmplyeeOptionsComponent,
+    component: EmployeeOptionsComponent,
     canActivate:[AuthGuardService]
-  }
+  },
+  {
+    path: 'editar-colaborador',
+    component: EditEmployeeComponent,
+    canActivate:[AuthGuardService]
+  },
+  {
+    path: 'deletar-colaborador',
+    component: DeleteEmployeeComponent,
+    canActivate: [AuthGuardService]
+  },
 ];
