@@ -8,6 +8,7 @@ import {PrimaryInputComponent} from "../../login/primary-input/primary-input.com
 import {LoginService} from "../../../service/login.service";
 import {BackButtonComponent} from "../../button/back-button/back-button.component";
 import {EmployeeButtonComponent} from "../../button/employee-button/employee-button.component";
+import {LoginResponse} from "../../../types/login-response";
 
 interface SignupForm {
   name: FormControl<string>;
@@ -40,6 +41,7 @@ export class NewEmployeeComponent {
 
   constructor(
     private loginService: LoginService,
+
   ) {
     this.signupForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -57,15 +59,16 @@ export class NewEmployeeComponent {
         this.signupForm.value.password!,
         this.signupForm.value.role!
       ).subscribe({
-        next: () => {
+        next: (response: LoginResponse) => {
+          // Armazene o token retornado no sessionStorage
+          sessionStorage.setItem('token', response.token);
           this.successMessage = 'Cadastro feito com sucesso!';
-
         },
         error: () => {
           this.errorMessage = 'Erro inesperado! Tente novamente';
-
         }
       });
+
     }
   }
 }

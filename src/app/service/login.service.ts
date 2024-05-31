@@ -21,8 +21,10 @@ export class LoginService {
     )
   }
 
-  public signup(name: string, password: string, role: string): Observable<any> {
-    return this.http.post<any>(`${this.apiServeUrl}/auth/register`, {name, password, role}).pipe();
+  public signup(name: string, password: string, role: string): Observable<LoginResponse> {
+    const token = sessionStorage.getItem("token");
+    return this.http.post<LoginResponse>(`${this.apiServeUrl}/auth/register`, {name, password, role},
+      {headers:{"Content-Type":"application/json", "Authorization":`Bearer ${token}`}}).pipe();
   }
 
 
