@@ -21,10 +21,6 @@ export class RecordWorkTimeService {
     return this.http.post<RecordWorkTime>(`${this.apiServeUrl}/ponto/entrada`, null, {params});
   }
 
-  public batata(name: string): Observable<any> {
-    return this.http.post<any>(`${this.apiServeUrl}/ponto/entrada`, null);
-  }
-
   public addCheckout(name: string): Observable<RecordWorkTime> {
     const params = new HttpParams().set('name', name);
     return this.http.post<RecordWorkTime>(`${this.apiServeUrl}/ponto/saida`, null, {params});

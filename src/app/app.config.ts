@@ -1,26 +1,26 @@
-import {ApplicationConfig} from '@angular/core';
-import {provideRouter} from '@angular/router';
-import {routes} from './app.routes';
-import {provideToastr} from "ngx-toastr";
-import {provideAnimations} from '@angular/platform-browser/animations';
-import {provideHttpClient, withInterceptors} from '@angular/common/http';
-import {TokenInterceptor} from "./service/auth-interceptor.service";
-
+import { ApplicationConfig } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { routes } from './app.routes';
+import { provideToastr } from "ngx-toastr";
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideHttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AuthInterceptorService } from "./service/auth-interceptor.service";
 
 export const appConfig: ApplicationConfig = {
 
-  providers:  [
+  providers: [
     provideRouter(routes),
-    provideHttpClient(withInterceptors([TokenInterceptor])),
+    provideHttpClient(),
     provideToastr(),
     provideAnimations(),
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: AuthInterceptorService,
-    //   multi: true
-    // }
+    NgxPaginationModule,
+    provideAnimationsAsync(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
   ]
 };
-
-
-

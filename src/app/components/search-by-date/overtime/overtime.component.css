@@ -1,15 +1,15 @@
+
 .titulo {
   display: flex;
-  justify-content: center;
   text-align: center;
   padding-bottom: 1em;
+  padding-left: 1.5em;
 }
 
 
 .date-class{
   display: flex;
   flex-direction: column;
-
   gap: 0.5em;
 
 
@@ -24,7 +24,7 @@
 }
 
 .search-label {
-  padding-top: 0.5em;
+  padding-bottom: 0.5em;
   font-size: 1.3em;
   font-weight: bold;
 }
@@ -44,14 +44,18 @@ input[type="date"] {
   gap: 0.3em;
 }
 
+.logout{
+  padding-top: 4em;
+}
 
 
 .card {
   display: flex;
+  justify-content: center;
   flex-direction: row;
-  width: 18.5em;
-  height: 5em;
-  border: 1px solid #000000;
+  width: 12em;
+  height: 2em;
+  border: 1px solid #ccc;
   border-radius: 3em;
   padding: 1em;
   margin: 0 auto;
@@ -60,28 +64,11 @@ input[type="date"] {
   background-color: orange;
 }
 
-.card-text,
-.card-titulo{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-grow: 1;
-  line-height: 1.2em;
-  font-size: 1.2em;
-
-}
-
-.card-titulo{
-font-weight: bold;
-  font-size: 1.5em;
-  padding-top: 0.8em;
-  color: #ffffff;
-}
 .card-text{
-font-weight: 400;
+  font-weight: 400;
   font-size: 1em;
   line-height: 1.7em;
-  padding-top: 0.5em;
+
 }
 
 .card h2 {
@@ -100,5 +87,4 @@ font-weight: 400;
 .card li:last-child {
   margin-bottom: 0;
 }
-
 @media(max-width:800px) {}

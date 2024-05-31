@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {ButtonComponent} from "../button/button.component";
+import {ButtonComponent} from "../button/button-default/button.component";
 import {EmployeeModule} from "../../../module/employee.module";
 import {RecordWorkTimeModule} from "../../../module/record-work-time.module";
 import {NgIf} from "@angular/common";
 import {LoginService} from "../../service/login.service";
-import {PrimaryInputComponent} from "../primary-input/primary-input.component";
+import {PrimaryInputComponent} from "./primary-input/primary-input.component";
 import {Router} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
 

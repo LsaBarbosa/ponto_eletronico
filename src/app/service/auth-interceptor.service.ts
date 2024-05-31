@@ -1,45 +1,26 @@
-import {HttpInterceptorFn} from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import {
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest
+} from '@angular/common/http';
+import { Observable } from 'rxjs';
+@Injectable()
+export class AuthInterceptorService  implements HttpInterceptor  {
 
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class AuthInterceptorService  implements HttpInterceptorFn {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const authToken = sessionStorage.getItem('token');
 
-  export const TokenInterceptor: HttpInterceptorFn = (req, next) => {
-console.log('passei')
-    if (req.headers.get('No-Auth') == 'True') {
-      return next(req);
-    }
-
-    if (typeof window !== 'undefined') {
-
-      const authToken = sessionStorage.getItem('token');
-
-      if (!authToken) {
-        //TODO redirection vers la page d'authentification
-      }
-
+    if (authToken) {
       const authReq = req.clone({
         setHeaders: {
-          Authorization: `Bearer ${authToken}`,
-        },
+          Authorization: `Bearer ${authToken}`
+        }
       });
-
-      return next(authReq);
+      return next.handle(authReq);
+    } else {
+      return next.handle(req);
     }
-    return next(req);
-
-
-  // intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-  //   const token = sessionStorage.getItem('token');
-  //   console.log("token texto" + token)
-  //   if (token) {
-  //     const cloned = req.clone({
-  //       headers: req.headers.set('Authorization', `Bearer ${token}`)
-  //     });
-  //     return next.handle(cloned);
-  //   } else {
-  //     return next.handle(req);
-  //   }
-  // }
+  }
 }

@@ -1,12 +1,14 @@
 import {Component} from '@angular/core';
-import {ButtonComponent} from "../button/button.component";
+import {ButtonComponent} from "../../button/button-default/button.component";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {EmployeeModule} from "../../../module/employee.module";
+import {EmployeeModule} from "../../../../module/employee.module";
 import {NgIf} from "@angular/common";
-import {LogoutComponent} from "../logout/logout.component";
-import {PrimaryInputComponent} from "../primary-input/primary-input.component";
-import {LoginService} from "../../service/login.service";
-import {BackButtonComponent} from "../button/back-button/back-button.component";
+import {LogoutComponent} from "../../login/logout/logout.component";
+import {PrimaryInputComponent} from "../../login/primary-input/primary-input.component";
+import {LoginService} from "../../../service/login.service";
+import {BackButtonComponent} from "../../button/back-button/back-button.component";
+import {EmployeeButtonComponent} from "../../button/employee-button/employee-button.component";
+import {LoginResponse} from "../../../types/login-response";
 
 interface SignupForm {
   name: FormControl<string>;
@@ -29,6 +31,7 @@ interface SignupForm {
     NgIf,
     LogoutComponent,
     BackButtonComponent,
+    EmployeeButtonComponent,
   ],
 })
 export class NewEmployeeComponent {
@@ -38,6 +41,7 @@ export class NewEmployeeComponent {
 
   constructor(
     private loginService: LoginService,
+
   ) {
     this.signupForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -55,15 +59,16 @@ export class NewEmployeeComponent {
         this.signupForm.value.password!,
         this.signupForm.value.role!
       ).subscribe({
-        next: () => {
+        next: (response: LoginResponse) => {
+          // Armazene o token retornado no sessionStorage
+          sessionStorage.setItem('token', response.token);
           this.successMessage = 'Cadastro feito com sucesso!';
-
         },
         error: () => {
           this.errorMessage = 'Erro inesperado! Tente novamente';
-
         }
       });
+
     }
   }
 }

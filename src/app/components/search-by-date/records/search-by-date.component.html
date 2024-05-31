@@ -1,20 +1,20 @@
 <div class="container">
   <div class="titulo">
-    <h1>Buscar Registro</h1>
+    <h1>Registro de Horas</h1>
   </div>
   <form (ngSubmit)="searchByDate()">
     <div class="form-group">
-      <input type="text" id="username" name="username" [(ngModel)]="username" required>
       <label class="search-label" for="username">Usuário:</label>
+      <input type="text" id="username" name="username" [(ngModel)]="username" required>
     </div>
     <div class="date-class">
       <div class="form-group">
-        <input type="date" class="form-control" id="start-date" name="start-date" [(ngModel)]="startDate">
         <label class="search-label" for="start-date">Data inicial:</label>
+        <input type="date" class="form-control" id="start-date" name="start-date" [(ngModel)]="startDate">
       </div>
       <div class="form-group">
-        <input type="date" class="form-control" id="end-date" name="end-date" [(ngModel)]="endDate">
         <label class="search-label" for="end-date">Data final:</label>
+        <input type="date" class="form-control" id="end-date" name="end-date" [(ngModel)]="endDate">
       </div>
     </div>
     <div class="buttons">

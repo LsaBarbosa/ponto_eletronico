@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {ButtonComponent} from "../button/button.component";
+import {ButtonComponent} from "../button/button-default/button.component";
 import {Router} from "@angular/router";
-import {LogoutComponent} from "../logout/logout.component";
+import {LogoutComponent} from "../login/logout/logout.component";
 import {BackButtonComponent} from "../button/back-button/back-button.component";
 
 

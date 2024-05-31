@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Router} from "@angular/router";
-import {ButtonComponent} from "../button/button.component";
+import {ButtonComponent} from "../../button/button-default/button.component";
 
 @Component({
   selector: 'app-logout',
