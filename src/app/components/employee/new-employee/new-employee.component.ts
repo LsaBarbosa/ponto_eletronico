@@ -8,7 +8,6 @@ import {PrimaryInputComponent} from "../../login/primary-input/primary-input.com
 import {LoginService} from "../../../service/login.service";
 import {BackButtonComponent} from "../../button/back-button/back-button.component";
 import {EmployeeButtonComponent} from "../../button/employee-button/employee-button.component";
-import {LoginResponse} from "../../../types/login-response";
 import {ErrorHandlerComponent} from "../../error-handler/error-handler.component";
 import {HttpErrorResponse} from "@angular/common/http";
 

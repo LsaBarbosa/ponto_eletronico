@@ -7,7 +7,6 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {RecordWorkTimeService} from "../../../service/record-work-time.service";
 import {RecordWorkTimeModule} from "../../../../module/record-work-time.module";
 import {DatePipe, NgForOf, NgIf} from "@angular/common";
-import {dateTimestampProvider} from "rxjs/internal/scheduler/dateTimestampProvider";
 import {BackButtonComponent} from "../../button/back-button/back-button.component";
 import {ErrorHandlerComponent} from "../../error-handler/error-handler.component";
 
