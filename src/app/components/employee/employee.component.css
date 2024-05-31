@@ -9,12 +9,18 @@
 }
 
 .buttons-logout{
+
   display: flex;
+  justify-content: center;
   flex-direction: row;
   font-size: 0.9em;
   text-align: center;
   gap: 0.5em;
   padding-top: 5em ;
+}
+.button-container{
+  display: flex;
+  justify-content: center;
 }
 .success-message, .failure-message {
   margin-top: 1em;

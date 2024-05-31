@@ -8,7 +8,7 @@
 
 .date-class{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 
   gap: 0.5em;
 
@@ -49,8 +49,8 @@ input[type="date"] {
 .card {
   display: flex;
   flex-direction: row;
-  width: 18em;
-  height: 7em;
+  width: 18.5em;
+  height: 5em;
   border: 1px solid #000000;
   border-radius: 3em;
   padding: 1em;
@@ -68,11 +68,19 @@ input[type="date"] {
   flex-grow: 1;
   line-height: 1.2em;
   font-size: 1.2em;
+
 }
 
 .card-titulo{
 font-weight: bold;
   font-size: 1.5em;
+  padding-top: 0.8em;
+  color: #ffffff;
+}
+.card-text{
+font-weight: 400;
+  font-size: 1em;
+  line-height: 1.7em;
   padding-top: 0.5em;
 }
 
