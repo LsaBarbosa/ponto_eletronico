@@ -22,7 +22,11 @@
     </div>
   </form>
   <div class="buttons-buscar">
-    <app-back-button/>
+    <app-button class="button" (click)="navigateTo(linkUrlRegistros)">Voltar</app-button>
+  </div>
+
+  <div class="msg">
+    <app-error-handler [error]="error" action="error"></app-error-handler>
   </div>
 <div *ngIf="totalOvertime" class="card">
   <div class="card-text">

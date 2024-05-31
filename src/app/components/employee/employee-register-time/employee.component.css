@@ -1,5 +1,9 @@
 
-
+h1{
+  font-size: 2.8em;
+  text-align: center;
+  font-family: Poppins, sans-serif;
+}
 .buttons-register{
   display: flex;
   flex-direction: column;
@@ -23,26 +27,38 @@
   justify-content: center;
   padding-top: 2em;
 }
+
 .success-message, .failure-message {
   margin-top: 1em;
   padding: 0.5em 1em;
-  border-radius: 5px;
-  font-weight: bold;
+  border-radius: 0.5em;
+  font-size: 1.2em;
+  text-align: center;
 }
-
 .msg,
 .button-container{
   display: flex;
   justify-content: center;
-}
+}.success-message, .failure-message {
+   margin-top: 1em;
+   padding: 0.5em 1em;
+   border-radius: 0.5em;
+   font-size: 1.2em;
+   text-align: center;
+ }
+
 .success-message {
-  background-color: #4CAF50;
-  color: #ffffff;
+
+  color: #40ff00;
+
+  font-weight: bold;
+  margin: 10px 0;
 }
 
 .failure-message {
   background-color: #f44336;
-  color: #ffffff;
+  color: white;
 }
+
 
 @media(max-width:800px) {}

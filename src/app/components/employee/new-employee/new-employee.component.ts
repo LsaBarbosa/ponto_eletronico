@@ -8,7 +8,8 @@ import {PrimaryInputComponent} from "../../login/primary-input/primary-input.com
 import {LoginService} from "../../../service/login.service";
 import {BackButtonComponent} from "../../button/back-button/back-button.component";
 import {EmployeeButtonComponent} from "../../button/employee-button/employee-button.component";
-import {LoginResponse} from "../../../types/login-response";
+import {ErrorHandlerComponent} from "../../error-handler/error-handler.component";
+import {HttpErrorResponse} from "@angular/common/http";
 
 interface SignupForm {
   name: FormControl<string>;
@@ -22,22 +23,23 @@ interface SignupForm {
   templateUrl: './new-employee.component.html',
   styleUrls: ['./new-employee.component.css'],
   standalone: true,
-  imports: [
-    ButtonComponent,
-    FormsModule,
-    EmployeeModule,
-    ReactiveFormsModule,
-    PrimaryInputComponent,
-    NgIf,
-    LogoutComponent,
-    BackButtonComponent,
-    EmployeeButtonComponent,
-  ],
+    imports: [
+        ButtonComponent,
+        FormsModule,
+        EmployeeModule,
+        ReactiveFormsModule,
+        PrimaryInputComponent,
+        NgIf,
+        LogoutComponent,
+        BackButtonComponent,
+        EmployeeButtonComponent,
+        ErrorHandlerComponent,
+    ],
 })
 export class NewEmployeeComponent {
   signupForm!: FormGroup<SignupForm>;
   successMessage: string | null = null;
-  errorMessage: string | null = null;
+  error: HttpErrorResponse | null = null;
 
   constructor(
     private loginService: LoginService,
@@ -52,20 +54,18 @@ export class NewEmployeeComponent {
 
   submit() {
     this.successMessage = null;
-    this.errorMessage = null;
+    this.error = null;
     if (this.signupForm.valid) {
       this.loginService.signup(
         this.signupForm.value.name!,
         this.signupForm.value.password!,
         this.signupForm.value.role!
       ).subscribe({
-        next: (response: LoginResponse) => {
-          // Armazene o token retornado no sessionStorage
-          sessionStorage.setItem('token', response.token);
+        next: () => {
           this.successMessage = 'Cadastro feito com sucesso!';
         },
-        error: () => {
-          this.errorMessage = 'Erro inesperado! Tente novamente';
+        error: (error: HttpErrorResponse) => {
+          this.error = error;
         }
       });
 

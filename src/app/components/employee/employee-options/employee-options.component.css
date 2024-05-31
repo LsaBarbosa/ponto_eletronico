@@ -1,4 +1,8 @@
-
+h1{
+  font-size: 2.8em;
+  text-align: center;
+  font-family: Poppins, sans-serif;
+}
 
 .buttons-register{
   display: flex;
@@ -21,29 +25,6 @@
 .button-container{
   display: flex;
   justify-content: center;
-}
-.success-message, .failure-message {
-  margin-top: 1em;
-  padding: 0.5em 1em;
-  border-radius: 5px;
-  font-weight: bold;
-}
-
-.msg,
-.button-container{
-  display: flex;
-  justify-content: center;
-}
-.success-message {
-  background-color: #4CAF50;
-  color: #ffffff;
-}
-
-.failure-message {
-  background-color: #f44336;
-  color: #ffffff;
-}
-.button-container{
-  padding-top: 1em;
+  padding-top: 2em;
 }
 @media(max-width:800px) {}

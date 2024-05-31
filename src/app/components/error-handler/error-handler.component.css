@@ -1,0 +1,6 @@
+.failure-message {
+  color: red;
+  font-weight: bold;
+  margin: 10px 0;
+  font-size: 1.3em;
+}

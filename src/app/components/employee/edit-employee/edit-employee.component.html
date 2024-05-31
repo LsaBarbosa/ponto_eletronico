@@ -34,8 +34,10 @@
       </div>
     </div>
   </form>
-  <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
-  <div *ngIf="errorMessage" class="failure-message">{{ errorMessage }}</div>
+  <div class="msg">
+    <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+    <app-error-handler [error]="error" action="error"></app-error-handler>
+  </div>
 </div>
 <div class="buttons-registrar">
   <app-employee-button/>

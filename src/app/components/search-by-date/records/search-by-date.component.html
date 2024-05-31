@@ -22,30 +22,34 @@
     </div>
   </form>
   <div class="buttons-buscar">
-    <app-back-button class="button" (click)="navigateTo(linkUrlRegistros)">Voltar</app-back-button>
+    <app-button class="button" (click)="navigateTo(linkUrlRegistros)">Voltar</app-button>
+  </div>
+
+  <div class="msg">
+    <app-error-handler [error]="error" action="error"></app-error-handler>
   </div>
 
   <div *ngIf="searchPerformed">
-  <div *ngIf="records.length > 0; else noRecordsFound">
-    <h2 class="card-titulo">Registros encontrados</h2>
-    <div *ngFor="let record of records" class="card">
-      <div class="card-text">
-        <ul>
-          <li>
-            <strong>Início da Jornada:</strong> {{ record.startOfWork | date: 'dd-MM-yyyy HH:mm' }}
-          </li>
-          <li>
-            <strong>Final da Jornada:</strong> {{ record.endOfWork | date: 'dd-MM-yyyy HH:mm' }}
-          </li>
-          <li>
-            <strong>Tempo trabalhado:</strong> {{ record.timeWorked }}
-          </li>
-        </ul>
+    <div *ngIf="records.length > 0; else noRecordsFound">
+      <h2 class="card-titulo">Registros encontrados</h2>
+      <div class="card" *ngFor="let record of records">
+        <div class="card-text">
+          <ul>
+            <li>
+              <strong>Início:</strong> {{ record.startOfWork | date: 'dd-MM-yyyy HH:mm' }}
+            </li>
+            <li>
+              <strong>Final:</strong> {{ record.endOfWork | date: 'dd-MM-yyyy HH:mm' }}
+            </li>
+            <li>
+              <strong>Tempo trabalhado:</strong> {{ record.timeWorked }}
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<ng-template class="card-titulo" #noRecordsFound>
-  <p class="card-titulo" >Nenhum Ponto foi batido nesse intervalo de data.</p>
-</ng-template>
+  <ng-template class="card-titulo" #noRecordsFound>
+    <p class="card-titulo">Nenhum Ponto foi batido nesse intervalo de data.</p>
+  </ng-template>
 </div>

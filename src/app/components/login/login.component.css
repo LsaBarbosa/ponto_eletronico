@@ -4,6 +4,11 @@
   padding-bottom: 1em;
   padding-left: 1.5em;
 }
+h1{
+  font-size: 2.8em;
+  text-align: center;
+  font-family: Poppins, sans-serif;
+}
 
 .form-group {
   display: flex;
@@ -19,8 +24,10 @@
   justify-content: center;
   gap: 0.3em;
 }
-/* Adicione estas regras ao seu arquivo register-new-employee.component.css */
-
+.msg{
+  display: flex;
+  justify-content: center;
+}
 .success-message, .failure-message {
   margin-top: 1em;
   padding: 0.5em 1em;
@@ -30,13 +37,13 @@
 }
 
 .success-message {
-  background-color: #4CAF50; /* Verde */
+  background-color: #4CAF50;
   color: white;
 }
 
 .failure-message {
-  background-color: #f44336; /* Vermelho */
+  background-color: #f44336;
   color: white;
 }
-B
+
 @media(max-width:800px) {}

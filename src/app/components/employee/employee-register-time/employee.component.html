@@ -11,9 +11,8 @@
   <div *ngIf="registerSuccessCheckOut" class="success-message">
     Saída realizada com sucesso!
   </div>
-  <div *ngIf="registerFailure" class="failure-message">
-    {{errorMessage}}
-  </div>
+    <app-error-handler [error]="errorCheckin" action="errorCheckin"></app-error-handler>
+    <app-error-handler [error]="errorCheckout" action="errorCheckout"></app-error-handler>
   </div>
   <div class="buttons-logout">
     <app-button class="button" (click)="navigateTo(linkUrlColaborador)">Opções <br>Colaborador</app-button>

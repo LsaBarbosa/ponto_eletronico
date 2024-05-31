@@ -2,14 +2,13 @@ import {Component} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ButtonComponent} from "../../button/button-default/button.component";
 import {Router} from "@angular/router";
-import {RecordWorkTime} from "../../../model/RecordWorkTime";
 import {HttpErrorResponse} from "@angular/common/http";
 import {RecordWorkTimeService} from "../../../service/record-work-time.service";
 import {RecordWorkTimeModule} from "../../../../module/record-work-time.module";
 import {DatePipe, NgForOf, NgIf} from "@angular/common";
-import {dateTimestampProvider} from "rxjs/internal/scheduler/dateTimestampProvider";
 import {LogoutComponent} from "../../login/logout/logout.component";
 import {BackButtonComponent} from "../../button/back-button/back-button.component";
+import {ErrorHandlerComponent} from "../../error-handler/error-handler.component";
 
 
 @Component({
@@ -25,6 +24,7 @@ import {BackButtonComponent} from "../../button/back-button/back-button.componen
     NgIf,
     LogoutComponent,
     BackButtonComponent,
+    ErrorHandlerComponent,
 
   ],
   templateUrl: './overtime.component.html',
@@ -36,9 +36,9 @@ export class OvertimeComponent {
   startDate: Date = new Date();
   endDate: Date = new Date();
   linkUrlRegistros: string = '/registros';
-  records: RecordWorkTime[] = [];
   totalOvertime: string='';
-
+  searchPerformed: boolean = false;
+  error: HttpErrorResponse | null = null;
   constructor(private recordWorkTimeService: RecordWorkTimeService, private router: Router) {
   }
 
@@ -50,9 +50,12 @@ export class OvertimeComponent {
         .subscribe(
           (response: { totalOvertime: string }) => {
             this.totalOvertime = response.totalOvertime;
+            this.searchPerformed = true;
+            this.error = null;
           },
           (error: HttpErrorResponse) => {
-            alert(error.message);
+            this.searchPerformed = false;
+            this.error = error;
           }
         );
     } else {
@@ -64,6 +67,4 @@ export class OvertimeComponent {
     this.router.navigate([url]);
   }
 
-  protected readonly dateTimestampProvider = dateTimestampProvider;
-  protected readonly DatePipe = DatePipe;
 }

@@ -7,8 +7,8 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {RecordWorkTimeService} from "../../../service/record-work-time.service";
 import {RecordWorkTimeModule} from "../../../../module/record-work-time.module";
 import {DatePipe, NgForOf, NgIf} from "@angular/common";
-import {dateTimestampProvider} from "rxjs/internal/scheduler/dateTimestampProvider";
 import {BackButtonComponent} from "../../button/back-button/back-button.component";
+import {ErrorHandlerComponent} from "../../error-handler/error-handler.component";
 
 @Component({
   selector: 'app-search-by-date',
@@ -22,6 +22,7 @@ import {BackButtonComponent} from "../../button/back-button/back-button.componen
     NgForOf,
     NgIf,
     BackButtonComponent,
+    ErrorHandlerComponent,
 
   ],
   templateUrl: './search-by-date.component.html',
@@ -34,32 +35,33 @@ export class SearchByDateComponent {
   linkUrlRegistros: string = '/registros';
   records: RecordWorkTime[] = [];
   searchPerformed: boolean = false;
-  constructor(private recordWorkTimeService: RecordWorkTimeService, private router: Router) {
-  }
+  error: HttpErrorResponse | null = null;
+
+  constructor(private recordWorkTimeService: RecordWorkTimeService, private router: Router) {}
 
   public searchByDate(): void {
     if (this.startDate && this.endDate && this.username) {
       const startDateString = this.startDate.toString().split('T')[0];
       const endDateString = this.endDate.toString().split('T')[0];
+
       this.recordWorkTimeService.searchRecordsByDateRange(this.username, startDateString, endDateString)
-        .subscribe(
-          (records: RecordWorkTime[]) => {
+        .subscribe({
+          next: (records: RecordWorkTime[]) => {
             this.records = records;
             this.searchPerformed = true;
+            this.error = null;
           },
-          (error: HttpErrorResponse) => {
-            alert(error.message);
+          error: (error: HttpErrorResponse) => {
+            this.searchPerformed = false;
+            this.error = error;
           }
-        );
+        });
     } else {
       alert('Por favor, preencha todos os campos.');
     }
   }
+
   navigateTo(url: string) {
     this.router.navigate([url]);
   }
-
-  protected readonly dateTimestampProvider = dateTimestampProvider;
-  protected readonly DatePipe = DatePipe;
-
 }
