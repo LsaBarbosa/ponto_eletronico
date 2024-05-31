@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ButtonComponent} from "../button.component";
+import {ButtonComponent} from "../button-default/button.component";
 import {Router} from "@angular/router";
 
 @Component({

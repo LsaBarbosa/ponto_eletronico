@@ -1,12 +1,13 @@
 import {Component} from '@angular/core';
-import {ButtonComponent} from "../button/button.component";
+import {ButtonComponent} from "../../button/button-default/button.component";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {EmployeeModule} from "../../../module/employee.module";
+import {EmployeeModule} from "../../../../module/employee.module";
 import {NgIf} from "@angular/common";
-import {LogoutComponent} from "../logout/logout.component";
-import {PrimaryInputComponent} from "../primary-input/primary-input.component";
-import {LoginService} from "../../service/login.service";
-import {BackButtonComponent} from "../button/back-button/back-button.component";
+import {LogoutComponent} from "../../login/logout/logout.component";
+import {PrimaryInputComponent} from "../../login/primary-input/primary-input.component";
+import {LoginService} from "../../../service/login.service";
+import {BackButtonComponent} from "../../button/back-button/back-button.component";
+import {EmployeeButtonComponent} from "../../button/employee-button/employee-button.component";
 
 interface SignupForm {
   name: FormControl<string>;
@@ -29,6 +30,7 @@ interface SignupForm {
     NgIf,
     LogoutComponent,
     BackButtonComponent,
+    EmployeeButtonComponent,
   ],
 })
 export class NewEmployeeComponent {

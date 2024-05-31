@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {ButtonComponent} from "../button/button.component";
+import {ButtonComponent} from "../../button/button-default/button.component";
 import {ActivatedRoute, Router} from "@angular/router";
-import {RecordWorkTimeService} from "../../service/record-work-time.service";
-import {EmployeeModule} from "../../../module/employee.module";
-import {RecordWorkTimeModule} from "../../../module/record-work-time.module";
+import {RecordWorkTimeService} from "../../../service/record-work-time.service";
+import {EmployeeModule} from "../../../../module/employee.module";
+import {RecordWorkTimeModule} from "../../../../module/record-work-time.module";
 import {FormsModule} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {HttpErrorResponse} from "@angular/common/http";
-import {LogoutComponent} from "../logout/logout.component";
+import {LogoutComponent} from "../../login/logout/logout.component";
 
 @Component({
   selector: 'app-employee',
@@ -24,7 +24,7 @@ import {LogoutComponent} from "../logout/logout.component";
   styleUrl: './employee.component.css'
 })
 export class EmployeeComponent implements OnInit {
-  linkUrlCadastrar: string = '/cadastrar';
+  linkUrlColaborador: string = '/opcao-colaborador';
   linkUrlRegistros: string = '/registros';
   username: string = '';
   registerSuccessCheckIn: boolean = false;
@@ -39,7 +39,8 @@ export class EmployeeComponent implements OnInit {
   ) {}
 
   navigateTo(url: string) {
-    this.router.navigate([url], {queryParams: {username: this.username}});
+    this.router.navigate([url],
+      {queryParams: {username: this.username}});
   }
 
   registerCheckIn() {

@@ -26,6 +26,8 @@
 .buttons-logout {
   padding-top: 4em;
 }
-
+.logout{
+  margin-top: 3em;
+}
 @media (max-width: 800px) {
 }

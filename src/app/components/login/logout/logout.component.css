@@ -1,0 +1,10 @@
+.button{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  font-size: 1em;
+  text-align: center;
+  gap: 1em;
+  padding-top: 1em;
+
+}
