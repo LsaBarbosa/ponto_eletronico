@@ -55,7 +55,7 @@ export class EditEmployeeComponent {
         this.editForm.value.role!
       ).subscribe({
         next: () => {
-          this.successMessage = 'Alteração feito com sucesso!';
+          this.successMessage = 'Alteração feita com sucesso!';
 
         },
         error: (error: HttpErrorResponse) => {
