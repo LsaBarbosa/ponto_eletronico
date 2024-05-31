@@ -6,6 +6,8 @@ import {LogoutComponent} from "../../login/logout/logout.component";
 import {NgIf} from "@angular/common";
 import {PrimaryInputComponent} from "../../login/primary-input/primary-input.component";
 import {EmployeeService} from "../../../service/employee.service";
+import {HttpErrorResponse} from "@angular/common/http";
+import {ErrorHandlerComponent} from "../../error-handler/error-handler.component";
 
 interface EditForm {
   name: FormControl<string>;
@@ -22,7 +24,8 @@ interface EditForm {
     LogoutComponent,
     NgIf,
     PrimaryInputComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ErrorHandlerComponent
   ],
   templateUrl: './edit-employee.component.html',
   styleUrl: './edit-employee.component.css'
@@ -30,7 +33,7 @@ interface EditForm {
 export class EditEmployeeComponent {
   editForm!: FormGroup<EditForm>;
   successMessage: string | null = null;
-  errorMessage: string | null = null;
+  error: HttpErrorResponse | null = null;
 
   constructor(
     private employeeService: EmployeeService,
@@ -44,7 +47,7 @@ export class EditEmployeeComponent {
 
   submit() {
     this.successMessage = null;
-    this.errorMessage = null;
+    this.error = null;
     if (this.editForm.valid) {
       this.employeeService.update(
         this.editForm.value.name!,
@@ -55,9 +58,8 @@ export class EditEmployeeComponent {
           this.successMessage = 'Alteração feito com sucesso!';
 
         },
-        error: () => {
-          this.errorMessage = 'Usuário sem permissão';
-
+        error: (error: HttpErrorResponse) => {
+          this.error = error;
         }
       });
     }

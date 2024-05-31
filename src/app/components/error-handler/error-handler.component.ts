@@ -11,7 +11,7 @@ import {NgIf} from "@angular/common";
   templateUrl: './error-handler.component.html',
   styleUrl: './error-handler.component.css'
 })
-export class ErrorHandlerComponent implements  OnChanges, OnDestroy {
+export class ErrorHandlerComponent implements OnChanges, OnDestroy {
   @Input() error: HttpErrorResponse | null = null;
   @Input() action: string = '';
   registerFailure: boolean = false;
@@ -27,17 +27,66 @@ export class ErrorHandlerComponent implements  OnChanges, OnDestroy {
   }
 
   getErrorMessage(error: HttpErrorResponse, action: string): string {
-    switch (error.status) {
-      case 404:
-        return `Colaborador não cadastrado`;
-      case 400:
-        return 'Preencha todos os campos corretamente';
-      case 403:
-        return 'Usuário sem permissão';
-      default:
-        return `Falha ao realizar ${action}`;
+    if (action === 'error') {
+      switch (error.status) {
+        case 404:
+          return `Colaborador não cadastrado`;
+        case 400:
+          return 'Preencha todos os campos corretamente';
+        case 403:
+          return 'Usuário sem permissão';
+        default:
+          return `Falha ao realizar ${action}`;
+      }
+    } else if (action === 'errorCheckin') {
+      switch (error.status) {
+        case 404:
+          return `Colaborador não cadastrado`;
+        case 400:
+          return 'Finalize o registro de entrada aberto';
+        case 403:
+          return 'Usuário sem permissão';
+        default:
+          return `Falha ao realizar ${action}`;
+      }
+    } else if (action === 'errorCheckout') {
+      switch (error.status) {
+        case 404:
+          return `Colaborador não cadastrado`;
+        case 400:
+          return 'Não há o registro de entrada aberto';
+        case 403:
+          return 'Usuário sem permissão';
+        default:
+          return `Falha ao realizar ${action}`;
+      }
+    }else if (action === 'login') {
+      switch (error.status) {
+        case 404:
+          return `Colaborador não cadastrado`;
+        case 400:
+          return 'Usuário ou Senha inválidos';
+        case 403:
+          return 'Usuário sem permissão';
+        default:
+          return `Falha ao realizar ${action}`;
+      }
+    }else if (action === 'create') {
+      switch (error.status) {
+        case 404:
+          return `Colaborador não cadastrado`;
+        case 400:
+          return 'Colaborador já cadastrado';
+        case 403:
+          return 'Usuário sem permissão';
+        default:
+          return `Falha ao realizar ${action}`;
+      }
+    } else {
+      return `Erro no servidor ${action}`;
     }
   }
+
 
   resetErrorMessage() {
     if (this.errorMessageTimeout) {

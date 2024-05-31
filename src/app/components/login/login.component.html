@@ -21,12 +21,12 @@
     <div class="buttons">
       <app-button type="submit" (click)="submit()" >Entrar</app-button>
     </div>
-      <div *ngIf="registerSuccess" class="success-message">
-        Registro realizado com sucesso!
+      <div class="msg">
+        <div *ngIf="registerSuccess" class="success-message">
+          Registro realizado com sucesso!
+        </div>
+        <app-error-handler [error]="error" action="login"></app-error-handler>
       </div>
-      <div *ngIf="registerFailure" class="failure-message">
-        {{errorMessage}}
-    </div>
     </div>
   </form>
 </div>

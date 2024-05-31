@@ -8,6 +8,7 @@ import {FormsModule} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {HttpErrorResponse} from "@angular/common/http";
 import {LogoutComponent} from "../../login/logout/logout.component";
+import {ErrorHandlerComponent} from "../../error-handler/error-handler.component";
 
 @Component({
   selector: 'app-employee',
@@ -18,7 +19,8 @@ import {LogoutComponent} from "../../login/logout/logout.component";
     RecordWorkTimeModule,
     FormsModule,
     NgIf,
-    LogoutComponent
+    LogoutComponent,
+    ErrorHandlerComponent
   ],
   templateUrl: './employee.component.html',
   styleUrl: './employee.component.css'
@@ -29,9 +31,8 @@ export class EmployeeComponent implements OnInit {
   username: string = '';
   registerSuccessCheckIn: boolean = false;
   registerSuccessCheckOut: boolean = false;
-  registerFailure: boolean = false;
-  errorMessageTimeout: any;
-  errorMessage: string = '';
+  errorCheckin: HttpErrorResponse |null = null;
+  errorCheckout: HttpErrorResponse |null = null;
 
   constructor(
     private router: Router,
@@ -50,13 +51,12 @@ export class EmployeeComponent implements OnInit {
         console.log('Entrada registrada com sucesso', response);
         this.registerSuccessCheckIn = true;
         this.registerSuccessCheckOut = false;
-        this.registerFailure = false;
+        this.errorCheckin = null;
       },
       error: (error: HttpErrorResponse) => {
         this.registerSuccessCheckIn = false;
-        this.registerFailure = true;
-        this.errorMessage = this.getErrorMessage(error, 'entrada');
-        this.resetErrorMessage();
+        this.registerSuccessCheckIn = false;
+        this.errorCheckin = error;
       }
     });
   }
@@ -64,40 +64,17 @@ export class EmployeeComponent implements OnInit {
   registerCheckOut() {
     const name = this.username;
     this.recordWorkTimeService.addCheckout(name).subscribe({
-      next: (response) => {
-        console.log('Saída registrada com sucesso', response);
+      next: () => {
         this.registerSuccessCheckOut = true;
         this.registerSuccessCheckIn = false;
-        this.registerFailure = false;
+        this.errorCheckout = null;
       },
       error: (error) => {
-        console.error('Erro ao registrar saída', error);
         this.registerSuccessCheckOut = false;
-        this.registerFailure = true;
-        this.errorMessage = this.getErrorMessage(error, 'saída');
-        this.resetErrorMessage();
+        this.registerSuccessCheckOut = false;
+        this.errorCheckout = error;
       }
     });
-  }
-
-  getErrorMessage(error: HttpErrorResponse, action: string): string {
-    if (error.status === 404) {
-      return `Colaborador não cadastrado`;
-    } else if (error.status === 400) {
-      if (action === 'entrada') {
-        return 'Registro de Saída não registrado';
-      } else if (action === 'saída') {
-        return 'Não há registro de entrada';
-      }
-    }
-    return `Falha ao registrar ${action}`;
-  }
-
-  resetErrorMessage() {
-    this.errorMessageTimeout = setTimeout(() => {
-      this.registerFailure = false;
-      this.errorMessage = '';
-    }, 2000); // Tempo em milissegundos (2 segundos)
   }
 
   ngOnInit() {

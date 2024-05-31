@@ -8,6 +8,7 @@ import {LoginService} from "../../service/login.service";
 import {PrimaryInputComponent} from "./primary-input/primary-input.component";
 import {Router} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
+import {ErrorHandlerComponent} from "../error-handler/error-handler.component";
 
 interface LoginForm {
   name: FormControl,
@@ -25,6 +26,7 @@ interface LoginForm {
     FormsModule,
     NgIf,
     PrimaryInputComponent,
+    ErrorHandlerComponent,
 
   ],
   providers: [
@@ -35,9 +37,7 @@ interface LoginForm {
 })
 export class LoginComponent {
   registerSuccess: boolean = false;
-  registerFailure: boolean = false;
-  errorMessageTimeout: any;
-  errorMessage: string = '';
+  error: HttpErrorResponse | null = null;
   loginForm!: FormGroup<LoginForm>;
 
   constructor(private loginService: LoginService, private router: Router) {
@@ -54,41 +54,16 @@ export class LoginComponent {
       this.loginService.login(name, password).subscribe({
         next: () => {
           this.registerSuccess = true;
-          this.registerFailure = false;
+          this.error = null;
           sessionStorage.setItem('username', name);
-          this.resetErrorMessage();
+
           this.router.navigate(['/colaborador']);
         },
         error: (error: HttpErrorResponse) => {
           this.registerSuccess = false;
-          this.registerFailure = true;
-          this.errorMessage = this.getErrorMessage(error, 'entrada');
-          this.resetErrorMessage();
+          this.error = error;
         }
       });
     }
   }
-
-  getErrorMessage(error: HttpErrorResponse, action: string): string {
-    if (error.status === 404) {
-      return `Colaborador não cadastrado`;
-
-    } else if (error.status === 400) {
-      if (action === 'entrada') {
-        return 'Usuário ou senha inválidos';
-
-      } else if (action === 'saída') {
-        return 'Erro inesperado, tente novamente';
-      }
-    }
-    return `Erro inesperado no servidor`;
-  }
-
-  resetErrorMessage() {
-    this.errorMessageTimeout = setTimeout(() => {
-      this.registerFailure = false;
-      this.errorMessage = '';
-    }, 3000); // Tempo em milissegundos (5 segundos)
-  }
-
 }

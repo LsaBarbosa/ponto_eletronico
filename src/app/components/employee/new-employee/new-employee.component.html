@@ -20,11 +20,11 @@
         <label>Nível de Acesso</label>
         <div class="radio">
           <label>
-            <input type="radio" formControlName="role" value="USER" />
+            <input type="radio" formControlName="role" value="USER"/>
             Usuário
           </label>
           <label>
-            <input type="radio" formControlName="role" value="ADMIN" />
+            <input type="radio" formControlName="role" value="ADMIN"/>
             Admin
           </label>
         </div>
@@ -34,8 +34,11 @@
       </div>
     </div>
   </form>
-  <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
-  <div *ngIf="errorMessage" class="failure-message">{{ errorMessage }}</div>
+  <div class="msg">
+    <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+
+    <app-error-handler [error]="error" action="create"></app-error-handler>
+  </div>
 </div>
 <div class="buttons-registrar">
   <app-employee-button/>

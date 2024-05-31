@@ -6,6 +6,8 @@ import {EmployeeButtonComponent} from "../../button/employee-button/employee-but
 import {LogoutComponent} from "../../login/logout/logout.component";
 import {NgIf} from "@angular/common";
 import {PrimaryInputComponent} from "../../login/primary-input/primary-input.component";
+import {HttpErrorResponse} from "@angular/common/http";
+import {ErrorHandlerComponent} from "../../error-handler/error-handler.component";
 
 interface DeleteForm {
   name: FormControl<string>;
@@ -21,7 +23,8 @@ interface DeleteForm {
     LogoutComponent,
     NgIf,
     PrimaryInputComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ErrorHandlerComponent
   ],
   templateUrl: './delete-employee.component.html',
   styleUrl: './delete-employee.component.css'
@@ -29,7 +32,7 @@ interface DeleteForm {
 export class DeleteEmployeeComponent {
   deleteForm!: FormGroup<DeleteForm>;
   successMessage: string | null = null;
-  errorMessage: string | null = null;
+  error: HttpErrorResponse | null = null;
 
   constructor(
     private employeeService: EmployeeService,
@@ -41,18 +44,17 @@ export class DeleteEmployeeComponent {
 
   submit() {
     this.successMessage = null;
-    this.errorMessage = null;
+    this.error = null;
     if (this.deleteForm.valid) {
       this.employeeService.deleteEmployee(
         this.deleteForm.value.name!
       ).subscribe({
         next: () => {
-          this.successMessage = 'Alteração feito com sucesso!';
+          this.successMessage = 'Exclusão feita com sucesso!';
 
         },
-        error: () => {
-          this.errorMessage = 'Usuário sem permissão';
-
+        error: (error: HttpErrorResponse) => {
+          this.error = error;
         }
       });
     }
