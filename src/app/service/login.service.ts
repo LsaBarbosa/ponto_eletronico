@@ -13,14 +13,8 @@ export class LoginService {
   constructor(private http: HttpClient) {
   }
 
-  public lodgin(name: string, password: string) {
+  public login(name: string, password: string) {
     return this.http.post<LoginResponse>(`${this.apiServeUrl}/auth/login`, {name, password}).pipe(
-      tap((value) => {
-        sessionStorage.setItem("token", value.token)
-      })
-    )
-  }  public login(name: string, password: string) {
-    return this.http.post<LoginResponse>(`3.139.55.4:8080/auth/login`, {name, password}).pipe(
       tap((value) => {
         sessionStorage.setItem("token", value.token)
       })
