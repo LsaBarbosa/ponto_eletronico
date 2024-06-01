@@ -1,4 +1,4 @@
 export const environment = {
 
-  apiServiceUrl: '3.139.55.4:8080',
+  apiServiceUrl: 'ec2-18-119-101-62.us-east-2.compute.amazonaws.com:8080',
 };
