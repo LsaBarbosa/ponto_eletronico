@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../environments/environment";
+import {RecordWorkTime} from "../model/RecordWorkTime";
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,10 @@ export class EmployeeService {
   constructor(
     private http: HttpClient
   ) {
+  }
+
+  getData(): Observable<any> {
+    return this.http.get(`${this.apiServeUrl}/server`);
   }
 
   public update(name: string, password: string, role: string): Observable<any> {
