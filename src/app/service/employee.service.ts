@@ -16,10 +16,6 @@ export class EmployeeService {
   ) {
   }
 
-  getData(): Observable<any> {
-    return this.http.get(`${this.apiServeUrl}/server`);
-  }
-
   public update(name: string, password: string, role: string): Observable<any> {
     const token = sessionStorage.getItem("token");
     const params = new HttpParams().set('name', name);
